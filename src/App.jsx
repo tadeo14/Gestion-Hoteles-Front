@@ -1,11 +1,12 @@
-import { useState } from 'react'
-import viteLogo from '/vite.svg'
+import { AppRouter } from './router/AppRouter'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
 
   return (
     <>
-      <h1>Gestor de hoteles</h1>
+      <AppRouter />
     </>
   )
 }
