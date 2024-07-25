@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
-import hotelApi from '../api/hotelApi';
+import pruebaApi from '../api/pruebaApi';
 import Swal from 'sweetalert2'
 
 export const Registro = () => {
@@ -11,16 +11,16 @@ export const Registro = () => {
 
   const registroBackend = async(name, edad, email, password) => { 
     try {
-      const resp = await hotelApi.post('/auth/registro', {
+      const resp = await pruebaApi.post("/auth/registro", {
         name,
-        email,
         edad,
+        email,
         password,
       })
       Swal.fire({
         position: "center",
         icon: "success",
-        title: "usuario creado",
+        title: "Usuario Creado",
         showConfirmButton: false,
         timer: 1500
       });
@@ -29,32 +29,24 @@ export const Registro = () => {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: 'El usuario registrado ya existe',
+          text: error.response.data.mensaje,
         });
-      }else if(error.response.status === 500){
+      }else if (error.response.status === 500) {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: 'Contactarse con un administrador',
+          text: "Contactarse con un administrado",
         });
       }
     }
   };
 
   const handleRegistro = (e) =>{
-    e.preventDefault();
-
+    e.preventDefault(); 
     //validaciones
-    if (name === '' || edad === '' || email === '' || password === ''){
-      return console.log('tdodos los campos son obligatorios');
-    }
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "usuario creado",
-      showConfirmButton: false,
-      timer: 1500
-    });
+   if (name === '' || edad === '' || email === '' || password === '') {
+    console.log('todos los campos son obligarios')
+   }   
     
     registroBackend(name, edad, email, password)
   }
