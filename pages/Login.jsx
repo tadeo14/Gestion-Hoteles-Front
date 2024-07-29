@@ -4,29 +4,26 @@ import Swal from 'sweetalert2';
 
 const Login = () => {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [emailError, setEmailError] = useState('');
+  const [contraseña, setContraseña] = useState('');
 
-  const handleEmailChange = (e) => {
+  const manejarCambioEmail = (e) => {
     setEmail(e.target.value);
-    if (!validateEmail(e.target.value)) {
-      setEmailError('Por favor, ingrese un correo electrónico válido.');
-    } else {
-      setEmailError('');
-    }
   };
 
-  const validateEmail = (email) => {
+  const manejarCambioContraseña = (e) => {
+    setContraseña(e.target.value);
+  };
+
+  const validarEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(String(email).toLowerCase());
   };
 
-  const handleSubmit = (e) => {
+  const manejarEnvio = (e) => {
     e.preventDefault();
-    if (validateEmail(email)) {
+    if (validarEmail(email)) {
       console.log('Email:', email);
-      console.log('Password:', password);
-      setEmailError('');
+      console.log('Contraseña:', contraseña);
 
       // Se muestra una alerta de un exitoso inicio de sesión 
       Swal.fire({
@@ -36,11 +33,15 @@ const Login = () => {
         confirmButtonText: 'Aceptar'
       });
 
-      // Aquí puedes agregar la lógica para manejar el inicio de sesión,
-      // como hacer una solicitud a un servidor.
+      
     } else {
-      setEmailError('Por favor, ingrese un correo electrónico válido.');
-     
+      // Se muestra una alerta de error si el correo electrónico es inválido
+      Swal.fire({
+        title: 'Error',
+        text: 'Por favor, ingrese un correo electrónico válido.',
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      });
     }
   };
 
@@ -49,27 +50,23 @@ const Login = () => {
       <Row className="justify-content-md-center">
         <Col md={4}>
           <h2 className="text-center">Login</h2>
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={manejarEnvio}>
             <Form.Group controlId="formBasicEmail" className="mb-3">
               <Form.Control
                 type="email"
                 placeholder="Ingrese su correo"
                 value={email}
-                onChange={handleEmailChange}
-                isInvalid={!!emailError}
+                onChange={manejarCambioEmail}
                 required
               />
-              <Form.Control.Feedback type="invalid">
-                {emailError}
-              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword" className="mb-3">
               <Form.Control
                 type="password"
                 placeholder="Ingrese su contraseña"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={contraseña}
+                onChange={manejarCambioContraseña}
                 required
               />
             </Form.Group>
@@ -77,6 +74,9 @@ const Login = () => {
             <Button variant="primary" type="submit" className="w-100 mt-3">
               Iniciar Sesion
             </Button>
+            <p className="text-center mt-3">
+              Si no está registrado, <a href="./registro">haga clic aquí</a>
+            </p>
           </Form>
         </Col>
       </Row>
