@@ -4,18 +4,18 @@ import pruebaApi from '../api/pruebaApi';
 import Swal from 'sweetalert2'
 
 export const Registro = () => {
-  const [name, setName] = useState('');
+  const [nombre, setNombre] = useState('');
   const [edad, setEdad] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [contraseña, setContraseña] = useState('');
 
-  const registroBackend = async(name, edad, email, password) => { 
+  const registroBackend = async(nombre, edad, email, contraseña) => { 
     try {
       const resp = await pruebaApi.post("/auth/registro", {
-        name,
+        nombre,
         edad,
         email,
-        password,
+        contraseña,
       })
       Swal.fire({
         position: "center",
@@ -44,11 +44,11 @@ export const Registro = () => {
   const handleRegistro = (e) =>{
     e.preventDefault(); 
     //validaciones
-   if (name === '' || edad === '' || email === '' || password === '') {
+   if (nombre === '' || edad === '' || email === '' || contraseña === '') {
     console.log('todos los campos son obligarios')
    }   
     
-    registroBackend(name, edad, email, password)
+    registroBackend(nombre, edad, email, contraseña)
   }
   return (
     <div className='justify-content-md-center row text-center'>
@@ -56,7 +56,7 @@ export const Registro = () => {
       <Form className='w-50 p-3' onSubmit={handleRegistro}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Nombre</Form.Label>
-        <Form.Control type="text" onChange={(e) => setName(e.target.value)}/>
+        <Form.Control type="text" onChange={(e) => setNombre(e.target.value)}/>
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -71,7 +71,7 @@ export const Registro = () => {
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Contraseña</Form.Label>
-        <Form.Control type="password" placeholder="escribir contraseña" onChange={(e) => setPassword(e.target.value)}/>
+        <Form.Control type="password" placeholder="escribir contraseña" onChange={(e) => setContraseña(e.target.value)}/>
       </Form.Group>
       
       <Button variant="primary" type="submit">
