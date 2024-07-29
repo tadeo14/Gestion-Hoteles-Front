@@ -51,8 +51,8 @@ export const Registro = () => {
     registroBackend(name, edad, email, password)
   }
   return (
-    <div>
-      <h1>Registro</h1>
+    <div className='justify-content-md-center row text-center'>
+      <h1> Registro</h1>
       <Form className='w-50 p-3' onSubmit={handleRegistro}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Nombre</Form.Label>
