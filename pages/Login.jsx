@@ -8,11 +8,23 @@ const Login = () => {
   const [contraseña, setContraseña] = useState("");
   const navigate = useNavigate();
 
-  const manejarCambioEmail = (e) => {
+ const loginBackend = async (email, contraseña) =>{
+      try {
+        const resp = await pruebaApi.post("/auth/login", {
+          email,
+          contraseña,
+        })
+        
+      } catch(error){
+
+      }
+ }
+  
+  const handleEmail = (e) => {
     setEmail(e.target.value);
   };
 
-  const manejarCambioContraseña = (e) => {
+  const handleContraseña = (e) => {
     setContraseña(e.target.value);
   };
 
@@ -29,13 +41,13 @@ const Login = () => {
       console.log("Email:", email);
       console.log("Contraseña:", contraseña);
 
-// alerta de inicio de sesion exitoso
       Swal.fire({
         title: "Inicio de sesión exitoso",
         text: "Has iniciado sesión correctamente.",
         icon: "success",
-        confirmButtonText: "Aceptar",
-      });
+        showConfirmButton: false,
+        timer: 1500,
+      });    
 // alerta de correo invalido      
     } else {
       Swal.fire({
@@ -47,8 +59,10 @@ const Login = () => {
     }
   };
 
-  const manejarRegistro = () => {
+  const handleRegistro = () => {
     navigate("/registro");
+    
+    loginBackend(email,contraseña)
   };
 
   return (
@@ -62,7 +76,7 @@ const Login = () => {
                 type="email"
                 placeholder="Ingrese su correo"
                 value={email}
-                onChange={manejarCambioEmail}
+                onChange={handleEmail}
                 required
               />
             </Form.Group>
@@ -72,7 +86,7 @@ const Login = () => {
                 type="password"
                 placeholder="Ingrese su contraseña"
                 value={contraseña}
-                onChange={manejarCambioContraseña}
+                onChange={handleContraseña}
                 required
               />
             </Form.Group>
@@ -82,7 +96,7 @@ const Login = () => {
             </Button>
             <Button
               variant="secondary"
-              onClick={manejarRegistro}
+              onClick={handleRegistro}
               className="w-100 mt-2"
             >
               Registrar
