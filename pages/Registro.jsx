@@ -56,7 +56,7 @@ export const Registro = () => {
       <Form className='w-50 p-3' onSubmit={handleRegistro}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Nombre</Form.Label>
-        <Form.Control type="text" onChange={(e) => setName(e.target.value)}/>
+        <Form.Control tnype="text" onChange={(e) => setName(e.target.value)}/>
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicEmail">
