@@ -3,21 +3,18 @@ import viteLogo from '/vite.svg'
 import { BrowserRouter as Router,Routes,Route } from 'react-router-dom'
 import HomePage from './pages/HomePage';
 import LandingPage from './pages/LandingPage';
+import { AppRouter } from './router/AppRouter'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {
 
   return (
     <>
-      <Router>
-        <Routes>
-          <Route  path='/'  element={<LandingPage/>}/>
-          <Route  path='/home'  element={<HomePage/>}/>
-        </Routes>
-      </Router>
+      <AppRouter />
     </>
 
   );
 }
 
-export default App;
+export default App
