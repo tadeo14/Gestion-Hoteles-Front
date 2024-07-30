@@ -1,6 +1,7 @@
-import React from "react";
+import { useState } from 'react'
+import viteLogo from '/vite.svg'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from "../pages/Login.jsx";
-
 function App() {
   return (
     <>
@@ -10,4 +11,4 @@ function App() {
   );
 }
 
-export default App;
+export default App
