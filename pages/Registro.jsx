@@ -54,12 +54,12 @@ export const Registro = () => {
     <div className='justify-content-md-center row text-center'>
       <h1> Registro</h1>
       <Form className='w-50 p-3' onSubmit={handleRegistro}>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Form.Group className="mb-3" controlId="formBasicNombre">
         <Form.Label>Nombre</Form.Label>
         <Form.Control type="text" onChange={(e) => setNombre(e.target.value)}/>
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Form.Group className="mb-3" controlId="formBasicEdad">
         <Form.Label>Edad</Form.Label>
         <Form.Control type="number" onChange={(e) => setEdad(e.target.value)}/>
       </Form.Group>
