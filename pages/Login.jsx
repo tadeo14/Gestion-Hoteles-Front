@@ -1,18 +1,34 @@
-import React, { useState } from 'react';
-import { Form, Button, Container, Row, Col } from 'react-bootstrap';
-import Swal from 'sweetalert2';
+import React, { useState } from "react";
+import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [contraseña, setContraseña] = useState('');
+  const [email, setEmail] = useState("");
+  const [contraseña, setContraseña] = useState("");
+  const navigate = useNavigate();
 
-  const manejarCambioEmail = (e) => {
+ const loginBackend = async (email, contraseña) =>{
+      try {
+        const resp = await pruebaApi.post("/auth/login", {
+          email,
+          contraseña,
+        })
+        
+      } catch(error){
+
+      }
+ }
+  
+  const handleEmail = (e) => {
     setEmail(e.target.value);
   };
 
-  const manejarCambioContraseña = (e) => {
+  const handleContraseña = (e) => {
     setContraseña(e.target.value);
   };
+
+  // Validaciones
 
   const validarEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -22,27 +38,31 @@ const Login = () => {
   const manejarEnvio = (e) => {
     e.preventDefault();
     if (validarEmail(email)) {
-      console.log('Email:', email);
-      console.log('Contraseña:', contraseña);
+      console.log("Email:", email);
+      console.log("Contraseña:", contraseña);
 
-      // Se muestra una alerta de un exitoso inicio de sesión 
       Swal.fire({
-        title: 'Inicio de sesión exitoso',
-        text: 'Has iniciado sesión correctamente.',
-        icon: 'success',
-        confirmButtonText: 'Aceptar'
-      });
-
-      
+        title: "Inicio de sesión exitoso",
+        text: "Has iniciado sesión correctamente.",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500,
+      });    
+// alerta de correo invalido      
     } else {
-      // Se muestra una alerta de error si el correo electrónico es inválido
       Swal.fire({
-        title: 'Error',
-        text: 'Por favor, ingrese un correo electrónico válido.',
-        icon: 'error',
-        confirmButtonText: 'Aceptar'
+        title: "Error",
+        text: "Por favor, ingrese un correo electrónico válido.",
+        icon: "error",
+        confirmButtonText: "Aceptar",
       });
     }
+  };
+
+  const handleRegistro = () => {
+    navigate("/registro");
+    
+    loginBackend(email,contraseña)
   };
 
   return (
@@ -56,7 +76,7 @@ const Login = () => {
                 type="email"
                 placeholder="Ingrese su correo"
                 value={email}
-                onChange={manejarCambioEmail}
+                onChange={handleEmail}
                 required
               />
             </Form.Group>
@@ -66,7 +86,7 @@ const Login = () => {
                 type="password"
                 placeholder="Ingrese su contraseña"
                 value={contraseña}
-                onChange={manejarCambioContraseña}
+                onChange={handleContraseña}
                 required
               />
             </Form.Group>
@@ -74,9 +94,13 @@ const Login = () => {
             <Button variant="primary" type="submit" className="w-100 mt-3">
               Iniciar Sesion
             </Button>
-            <p className="text-center mt-3">
-              Si no está registrado, <a href="./registro">haga clic aquí</a>
-            </p>
+            <Button
+              variant="secondary"
+              onClick={handleRegistro}
+              className="w-100 mt-2"
+            >
+              Registrar
+            </Button>
           </Form>
         </Col>
       </Row>
@@ -85,3 +109,4 @@ const Login = () => {
 };
 
 export default Login;
+
