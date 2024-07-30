@@ -35,7 +35,7 @@ export const Registro = () => {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: "Contactarse con un administrado",
+          text: "Contactarse con un administrador",
         });
       }
     }
@@ -81,3 +81,4 @@ export const Registro = () => {
     </div>
   )
 }
+export default Registro;
