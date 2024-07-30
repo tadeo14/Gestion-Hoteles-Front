@@ -1,37 +1,14 @@
-
+import { useState } from 'react'
+import viteLogo from '/vite.svg'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Login from "../pages/Login.jsx";
 function App() {
-
-  const [nombre, setNombre] = useState('');
-  const [edad, setEdad] = useState('');
-  const [email, setEmail] = useState('');
-  const [contraseña, setContraseña] = useState('');
-
-  const enviarDatosAlBackend = async (nombre, edad, email, contraseña) => {
-    try {
-      const resp = await pruebaApi.post('auth/registro', {
-        nombre,
-        edad,
-        email,
-        contraseña,
-      });
-      console.log(resp);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  
-  
-  
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (nombre === "" || edad === "" || email === "" || contraseña === "") {
-      console.log('todos los campos son obligatorios');
-    }
-    
-    enviarDatosAlBackend(nombre, edad, email, contraseña);
-  };
-
   return (
+    <>
+      <h1>Gestor de hoteles</h1>
+      <Login />
+    </>
+  );
+}
 
-
+export default App
