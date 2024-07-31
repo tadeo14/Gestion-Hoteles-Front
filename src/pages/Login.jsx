@@ -2,24 +2,50 @@ import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import pruebaApi from "../api/pruebaApi";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [contraseña, setContraseña] = useState("");
   const navigate = useNavigate();
 
- const loginBackend = async (email, contraseña) =>{
-      try {
-        const resp = await pruebaApi.post("/auth/login", {
-          email,
-          contraseña,
-        })
-        
-      } catch(error){
-
+  const loginBackend = async (email, contraseña) => {
+    try {
+      const resp = await pruebaApi.post("/auth/login", {
+        email,
+        contraseña,
+      });
+      if (resp.status === 200) {
+        Swal.fire({
+          title: "Inicio de sesión exitoso",
+          text: "Has iniciado sesión correctamente.",
+          icon: "success",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        // Redirige a la página principal
+        navigate("/principal");
       }
- }
-  
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        Swal.fire({
+          title: "Error",
+          text:
+            error.response.data.mensaje || "Correo o contraseña incorrectos.",
+          icon: "error",
+          confirmButtonText: "Aceptar",
+        });
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: "Ocurrió un problema. Por favor, inténtalo de nuevo más tarde.",
+          icon: "error",
+          confirmButtonText: "Aceptar",
+        });
+      }
+    }
+  };
+
   const handleEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -29,7 +55,6 @@ const Login = () => {
   };
 
   // Validaciones
-
   const validarEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(String(email).toLowerCase());
@@ -37,32 +62,27 @@ const Login = () => {
 
   const manejarEnvio = (e) => {
     e.preventDefault();
-    if (validarEmail(email)) {
-      console.log("Email:", email);
-      console.log("Contraseña:", contraseña);
-
+    if (!email || !contraseña) {
       Swal.fire({
-        title: "Inicio de sesión exitoso",
-        text: "Has iniciado sesión correctamente.",
-        icon: "success",
-        showConfirmButton: false,
-        timer: 1500,
-      });    
-// alerta de correo invalido      
-    } else {
+        title: "Error",
+        text: "Todos los campos son obligatorios.",
+        icon: "error",
+        confirmButtonText: "Aceptar",
+      });
+    } else if (!validarEmail(email)) {
       Swal.fire({
         title: "Error",
         text: "Por favor, ingrese un correo electrónico válido.",
         icon: "error",
         confirmButtonText: "Aceptar",
       });
+    } else {
+      loginBackend(email, contraseña);
     }
   };
 
   const handleRegistro = () => {
     navigate("/registro");
-    
-    loginBackend(email,contraseña)
   };
 
   return (
@@ -109,4 +129,5 @@ const Login = () => {
 };
 
 export default Login;
+
 
