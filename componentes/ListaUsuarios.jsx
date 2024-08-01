@@ -1,36 +1,39 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Table from 'react-bootstrap/Table'; // Asegúrate de importar Table desde react-bootstrap
+import pruebaApi from '../src/api/pruebaApi';
 
 export const ListaUsuarios = () => {
+
+    const getUsuario = async () => {
+        try {
+            const resp = await pruebaApi.get('admin/usuarios');
+            console.log(resp);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        getUsuario();
+    }, []);
+
+
+
+
+
+
   return (
     <>
       <Table striped bordered hover>
         <thead>
           <tr>
             <th>#</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Username</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td colSpan={2}>Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
         </tbody>
       </Table>
     </>
