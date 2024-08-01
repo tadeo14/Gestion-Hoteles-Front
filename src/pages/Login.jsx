@@ -3,6 +3,7 @@ import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import pruebaApi from "../api/pruebaApi";
+import "../assets/Login.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -23,7 +24,6 @@ const Login = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        // Redirige a la página principal
         navigate("/principal");
       }
     } catch (error) {
@@ -86,48 +86,52 @@ const Login = () => {
   };
 
   return (
-    <Container>
-      <Row className="justify-content-md-center">
-        <Col md={4}>
-          <h2 className="text-center">Login</h2>
-          <Form onSubmit={manejarEnvio}>
-            <Form.Group controlId="formBasicEmail" className="mb-3">
-              <Form.Control
-                type="email"
-                placeholder="Ingrese su correo"
-                value={email}
-                onChange={handleEmail}
-                required
-              />
-            </Form.Group>
+    // Formulario de Login
 
-            <Form.Group controlId="formBasicPassword" className="mb-3">
-              <Form.Control
-                type="password"
-                placeholder="Ingrese su contraseña"
-                value={contraseña}
-                onChange={handleContraseña}
-                required
-              />
-            </Form.Group>
+    <div className="login-background">
+      <Container className="d-flex justify-content-center align-items-center min-vh-100">
+        <Row className="w-100">
+          <Col md={4}>
+            <div className="form-container">
+              <h2 className="text-center">Login</h2>
+              <Form onSubmit={manejarEnvio}>
+                <Form.Group controlId="formBasicEmail" className="mb-3">
+                  <Form.Control
+                    type="email"
+                    placeholder="Ingrese su correo"
+                    value={email}
+                    onChange={handleEmail}
+                    required
+                  />
+                </Form.Group>
 
-            <Button variant="primary" type="submit" className="w-100 mt-3">
-              Iniciar Sesion
-            </Button>
-            <Button
-              variant="secondary"
-              onClick={handleRegistro}
-              className="w-100 mt-2"
-            >
-              Registrar
-            </Button>
-          </Form>
-        </Col>
-      </Row>
-    </Container>
+                <Form.Group controlId="formBasicPassword" className="mb-3">
+                  <Form.Control
+                    type="password"
+                    placeholder="Ingrese su contraseña"
+                    value={contraseña}
+                    onChange={handleContraseña}
+                    required
+                  />
+                </Form.Group>
+
+                <Button variant="primary" type="submit" className="w-100 mt-3">
+                  Iniciar Sesion
+                </Button>
+                <Button
+                  variant="secondary"
+                  onClick={handleRegistro}
+                  className="w-100 mt-2"
+                >
+                  Registrar
+                </Button>
+              </Form>
+            </div>
+          </Col>
+        </Row>
+      </Container>
+    </div>
   );
 };
 
 export default Login;
-
-
