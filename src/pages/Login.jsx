@@ -15,7 +15,7 @@ const Login = () => {
         email,
         contraseña,
       });
-      if (resp.status === 200) {
+      
         Swal.fire({
           title: "Inicio de sesión exitoso",
           text: "Has iniciado sesión correctamente.",
@@ -24,8 +24,8 @@ const Login = () => {
           timer: 1500,
         });
         // Redirige a la página principal
-        navigate("/principal");
-      }
+      console.log(resp);
+      
     } catch (error) {
       if (error.response && error.response.status === 400) {
         Swal.fire({
