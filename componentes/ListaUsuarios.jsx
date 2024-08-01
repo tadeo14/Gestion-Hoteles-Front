@@ -3,18 +3,20 @@ import Table from 'react-bootstrap/Table'; // Asegúrate de importar Table desde
 import pruebaApi from '../src/api/pruebaApi';
 
 export const ListaUsuarios = () => {
+    const [usuarios, setUsuarios] = React.useState([]);
 
-    const getUsuario = async () => {
+    const getUsuarios = async () => {
         try {
             const resp = await pruebaApi.get('admin/usuarios');
             console.log(resp);
+            setUsuarios(resp.data.listaUsuarios);
         } catch (error) {
             console.log(error);
         }
     }
 
     useEffect(() => {
-        getUsuario();
+        getUsuarios();
     }, []);
 
 
@@ -33,8 +35,17 @@ export const ListaUsuarios = () => {
             
           </tr>
         </thead>
-        <tbody>
-        </tbody>
+                <tbody>
+                  {usuarios.map((usuario) => {
+                      return (
+                          <tr>
+                              <td>{usuario._id}</td>
+                              <td>{usuario.nombre}</td>
+                              <td>{usuario.email}</td>
+                          </tr>
+                      )
+                  })}
+                </tbody>
       </Table>
     </>
   );
