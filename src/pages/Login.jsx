@@ -24,7 +24,7 @@ const Login = () => {
           timer: 1500,
         });
         // Redirige a la página principal
-      console.log(resp);
+      localStorage.setItem("token", resp.data.token);
       
     } catch (error) {
       if (error.response && error.response.status === 400) {
