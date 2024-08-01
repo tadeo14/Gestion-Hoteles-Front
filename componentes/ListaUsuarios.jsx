@@ -25,12 +25,14 @@ export const ListaUsuarios = () => {
 
   return (
     <>
+      <h1>Listado de Usuarios</h1>
       <Table striped bordered hover>
         <thead>
           <tr>
             <th>#</th>
             <th>Nombre</th>
             <th>Email</th>
+            <th>Acciones</th>
             
           </tr>
         </thead>
@@ -38,9 +40,13 @@ export const ListaUsuarios = () => {
                   {usuarios.map((usuario) => {
                       return (
                           <tr>
-                              <td>{usuario._id}</td>
-                              <td>{usuario.nombre}</td>
-                              <td>{usuario.email}</td>
+                          <td>{usuario._id}</td>
+                          <td>{usuario.nombre}</td>
+                          <td>{usuario.email}</td>
+                          <td>
+                            <button className='btn btn-info'>Editar</button>
+                            <button className='btn btn-danger'>Eliminar</button>
+                          </td>
                           </tr>
                       )
                   })}

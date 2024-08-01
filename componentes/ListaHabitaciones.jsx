@@ -8,7 +8,7 @@ export const ListaHabitaciones = () => {
     const getHabitaciones = async () => {
         try {
             const resp = await pruebaApi.get('admin/habitaciones');
-            console.log(resp.data.habitaciones);
+            setHabitaciones(resp.data.habitaciones);
             //setHabitaciones(resp.data.);
         } catch (error) {
             console.log(error);
@@ -26,26 +26,29 @@ export const ListaHabitaciones = () => {
 
   return (
     <>
+      <h1>Listado de Habitaciones</h1>
       <Table striped bordered hover>
         <thead>
           <tr>
             <th>#</th>
-            <th>Nombre</th>
-            <th>Email</th>
+            <th>Numero</th>
+            <th>Precio</th>
+            <th>Tipo</th>
             
           </tr>
         </thead>
-                {/* <tbody>
-                  {usuarios.map((usuario) => {
+                <tbody>
+                  {habitaciones.map((habitaciones) => {
                       return (
                           <tr>
-                              <td>{usuario._id}</td>
-                              <td>{usuario.nombre}</td>
-                              <td>{usuario.email}</td>
+                            <td>{habitaciones._id}</td>
+                            <td>{habitaciones.numero}</td>
+                            <td>{habitaciones.precio}</td>
+                            <td>{ habitaciones.tipo}</td>
                           </tr>
                       )
                   })}
-                </tbody> */}
+                </tbody>
       </Table>
     </>
   );
