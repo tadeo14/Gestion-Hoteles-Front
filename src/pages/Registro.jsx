@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
 import pruebaApi from '../api/pruebaApi';
 import Swal from 'sweetalert2'
-import { Nav } from './Nav';
 
 export const Registro = () => {
   const [nombre, setNombre] = useState('');
@@ -53,7 +52,6 @@ export const Registro = () => {
   }
   return (
     <Container>
-      <div><Nav /></div>
       
     <div className='justify-content-md-center row text-center'>
       <h1>Registro</h1>

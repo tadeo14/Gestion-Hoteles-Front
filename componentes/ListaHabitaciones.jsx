@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import pruebaApi from "../api/pruebaApi";
-import { Container } from "react-bootstrap";
+import pruebaApi from "../src/api/pruebaApi";
+import { Container, Table} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const ListaHabitaciones = () => {
   const [habitaciones, setHabitaciones] = useState([]);
 
   useEffect(() => {
-    const fetchHabitaciones = async () => {
+    const listaHabitaciones = async () => {
       try {
         const response = await pruebaApi.get('/admin/listaHabitaciones');
         console.log('Response data:', response.data); // Verifica los datos aquí
@@ -23,26 +24,41 @@ const ListaHabitaciones = () => {
       }
     };
 
-    fetchHabitaciones();
+    listaHabitaciones();
   }, []);
 
   return (
-    <Container>
-      <h1>Lista de Habitaciones</h1>
-      <ul>
-        {Array.isArray(habitaciones) && habitaciones.length > 0 ? (
-          habitaciones.map((habitacion) => (
-            <li key={habitacion._id}>
-              <h2>{habitacion.numero}</h2>
-              <p>{habitacion.imagen}</p>
-              <p>Precio: ${habitacion.precio}</p>
-            </li>
-          ))
-        ) : (
-          <p>No hay habitaciones disponibles.</p>
-        )}
-      </ul>
-    </Container>
+    <>
+      <Table striped bordered hover>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Username</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td colSpan={2}>Larry the Bird</td>
+          <td>@twitter</td>
+        </tr>
+      </tbody>
+    </Table>
+    </>
   );
 };
 

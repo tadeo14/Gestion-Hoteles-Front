@@ -3,7 +3,6 @@ import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import pruebaApi from "../api/pruebaApi";
-import { Nav } from "./Nav";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -89,9 +88,7 @@ const Login = () => {
   return (
     
     <Container>
-      <div>
-       <Nav />
-      </div>
+      
       <Row className="justify-content-md-center">
         <Col md={4}>
           <h2 className="text-center">Login</h2>
