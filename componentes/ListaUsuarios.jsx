@@ -8,7 +8,6 @@ export const ListaUsuarios = () => {
     const getUsuarios = async () => {
         try {
             const resp = await pruebaApi.get('admin/usuarios');
-            console.log(resp);
             setUsuarios(resp.data.listaUsuarios);
         } catch (error) {
             console.log(error);

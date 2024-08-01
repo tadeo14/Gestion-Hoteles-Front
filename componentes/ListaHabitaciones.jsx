@@ -1,63 +1,52 @@
-import React, { useEffect, useState } from 'react';
-import pruebaApi from "../src/api/pruebaApi";
-import { Container, Table} from "react-bootstrap";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useEffect } from 'react';
+import Table from 'react-bootstrap/Table'; // Asegúrate de importar Table desde react-bootstrap
+import pruebaApi from '../src/api/pruebaApi';
 
+export const ListaHabitaciones = () => {
+    const [habitaciones, setHabitaciones] = React.useState([]);
 
-const ListaHabitaciones = () => {
-  const [habitaciones, setHabitaciones] = useState([]);
-
-  useEffect(() => {
-    const listaHabitaciones = async () => {
-      try {
-        const response = await pruebaApi.get('/admin/listaHabitaciones');
-        console.log('Response data:', response.data); // Verifica los datos aquí
-
-        // Accede a la propiedad `habitaciones` en lugar de usar la respuesta directamente
-        if (response.data && Array.isArray(response.data.habitaciones)) {
-          setHabitaciones(response.data.habitaciones);
-        } else {
-          console.error('Expected an array of habitaciones but got:', response.data.habitaciones);
+    const getHabitaciones = async () => {
+        try {
+            const resp = await pruebaApi.get('admin/habitaciones');
+            console.log(resp.data.habitaciones);
+            //setHabitaciones(resp.data.);
+        } catch (error) {
+            console.log(error);
         }
-      } catch (error) {
-        console.error('Error fetching the rooms:', error);
-      }
-    };
+    }
 
-    listaHabitaciones();
-  }, []);
+    useEffect(() => {
+        getHabitaciones();
+    }, []);
+
+
+
+
+
 
   return (
     <>
       <Table striped bordered hover>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Username</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td colSpan={2}>Larry the Bird</td>
-          <td>@twitter</td>
-        </tr>
-      </tbody>
-    </Table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            
+          </tr>
+        </thead>
+                {/* <tbody>
+                  {usuarios.map((usuario) => {
+                      return (
+                          <tr>
+                              <td>{usuario._id}</td>
+                              <td>{usuario.nombre}</td>
+                              <td>{usuario.email}</td>
+                          </tr>
+                      )
+                  })}
+                </tbody> */}
+      </Table>
     </>
   );
 };

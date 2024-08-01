@@ -5,7 +5,7 @@ import { ListaUsuarios } from '../../componentes/ListaUsuarios'
 export const Admin = () => {
   return (
       <>
-          {/* <ListaHabitaciones /> */}
+          <ListaHabitaciones />
           
           <ListaUsuarios/> 
       </>
