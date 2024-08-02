@@ -24,7 +24,7 @@ const Login = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        navigate("/principal");
+        navigate("/Home");
       }
     } catch (error) {
       if (error.response && error.response.status === 400) {
