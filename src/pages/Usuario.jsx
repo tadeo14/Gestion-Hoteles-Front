@@ -1,13 +1,14 @@
 import React from 'react'
-import { ListaUsuarios } from '../../componentes/ListaUsuarios'
+
 import ListadoReservasAdmin from '../../componentes/ListadoReservasAdmin'
+import ListadoReservasUsuario from '../../componentes/ListadoReservasUsuario';
 
 export const Usuario = () => {
   return (
       <>
-          <ListadoReservasAdmin />
+          <ListadoReservasUsuario />
           
-          <ListaUsuarios/> 
+          
       </>
   )
 }
