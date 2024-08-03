@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Container, Form } from 'react-bootstrap'
+import { Button, Form } from 'react-bootstrap'
 import pruebaApi from '../api/pruebaApi';
 import Swal from 'sweetalert2'
 
@@ -51,38 +51,34 @@ export const Registro = () => {
     registroBackend(nombre, edad, email, contraseña)
   }
   return (
-    <Container>
-      
     <div className='justify-content-md-center row text-center'>
-      <h1>Registro</h1>
+      <h1> Registro</h1>
       <Form className='w-50 p-3' onSubmit={handleRegistro}>
-        <Form.Group className="mb-3" controlId="formBasicNombre">
-          <Form.Label>Nombre</Form.Label>
-          <Form.Control type="text" onChange={(e) => setNombre(e.target.value)} />
-        </Form.Group>
-  
-        <Form.Group className="mb-3" controlId="formBasicEdad">
-          <Form.Label>Edad</Form.Label>
-          <Form.Control type="number" onChange={(e) => setEdad(e.target.value)} />
-        </Form.Group>
-  
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Correo electronico</Form.Label>
-          <Form.Control type="email" placeholder="@gmail.com" onChange={(e) => setEmail(e.target.value)} />
-        </Form.Group>
-  
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Contraseña</Form.Label>
-          <Form.Control type="password" placeholder="escribir contraseña" onChange={(e) => setContraseña(e.target.value)} />
-        </Form.Group>
-        
-        <Button variant="primary" type="submit">
-          Registrarse
-        </Button>
-      </Form>
+      <Form.Group className="mb-3" controlId="formBasicNombre">
+        <Form.Label>Nombre</Form.Label>
+        <Form.Control type="text" onChange={(e) => setNombre(e.target.value)}/>
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicEdad">
+        <Form.Label>Edad</Form.Label>
+        <Form.Control type="number" onChange={(e) => setEdad(e.target.value)}/>
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Correo electronico</Form.Label>
+        <Form.Control type="email" placeholder="@gmail.com" onChange={(e) => setEmail(e.target.value)}/>
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label>Contraseña</Form.Label>
+        <Form.Control type="password" placeholder="escribir contraseña" onChange={(e) => setContraseña(e.target.value)}/>
+      </Form.Group>
+      
+      <Button variant="primary" type="submit">
+        Registrarse
+      </Button>
+    </Form>
     </div>
-  </Container>
-  
   )
 }
 export default Registro;
