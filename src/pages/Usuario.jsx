@@ -1,18 +1,15 @@
 import React from 'react'
-import ListaHabitaciones from '../../componentes/ListaHabitaciones'
 import { ListaUsuarios } from '../../componentes/ListaUsuarios'
 import ListadoReservasAdmin from '../../componentes/ListadoReservasAdmin'
 
-export const Admin = () => {
+export const Usuario = () => {
   return (
       <>
-          <ListaHabitaciones />
+          <ListadoReservasAdmin />
           
           <ListaUsuarios/> 
-          
-          <ListadoReservasAdmin />
       </>
   )
 }
 
-export default Admin;
+export default Usuario;

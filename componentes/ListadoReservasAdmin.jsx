@@ -2,13 +2,13 @@ import React, { useEffect } from 'react';
 import Table from 'react-bootstrap/Table'; // Asegúrate de importar Table desde react-bootstrap
 import pruebaApi from '../src/api/pruebaApi';
 
-export const ListaReservasAdmin = () => {
+export const ListadoReservasAdmin = () => {
     const [reservas, setReservas] = React.useState([]);
 
-    const getHabitaciones = async () => {
+    const getReservas = async () => {
         try {
-            const resp = await pruebaApi.get('room/reservas');
-            setHabitaciones(resp.data.habitaciones);
+            const resp = await pruebaApi.get('room/listadoReservas');
+            setReservas(resp.data.listadoReservas);
             //setHabitaciones(resp.data.);
         } catch (error) {
             console.log(error);
@@ -16,7 +16,7 @@ export const ListaReservasAdmin = () => {
     }
 
     useEffect(() => {
-        getHabitaciones();
+        getReservas();
     }, []);
 
 
@@ -26,25 +26,25 @@ export const ListaReservasAdmin = () => {
 
   return (
     <>
-      <h1>Listado de Habitaciones</h1>
+      <h1>Listado de Reservas</h1>
       <Table striped bordered hover>
         <thead>
           <tr>
             <th>#</th>
-            <th>Numero</th>
-            <th>Precio</th>
-            <th>Tipo</th>
+            <th>Usuario</th>
+            <th>Fecha Inicio</th>
+            <th>Fecha Fin</th>
             
           </tr>
         </thead>
                 <tbody>
-                  {habitaciones.map((habitaciones) => {
+                  {reservas.map((reservas) => {
                       return (
-                          <tr>
-                            <td>{habitaciones._id}</td>
-                            <td>{habitaciones.numero}</td>
-                            <td>{habitaciones.precio}</td>
-                            <td>{ habitaciones.tipo}</td>
+                        <tr > 
+                              <td>{reservas._id}</td>
+                              <td>{reservas.usuario}</td>
+                              <td>{reservas.fechaInicio}</td>
+                              <td>{reservas.fechaFin}</td>
                           </tr>
                       )
                   })}
@@ -54,4 +54,4 @@ export const ListaReservasAdmin = () => {
   );
 };
 
-export default ListaHabitaciones;
+export default ListadoReservasAdmin;

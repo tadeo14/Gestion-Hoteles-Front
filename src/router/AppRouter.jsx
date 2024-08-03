@@ -5,7 +5,7 @@ import Login from "../pages/Login.jsx";
 import Registro from "../pages/Registro.jsx";
 import Home from "../pages/Home.jsx";
 import { Admin } from "../pages/Admin.jsx";
-
+import {Usuario} from "../pages/Usuario.jsx"
 
 const AppRouter = () => {
   return (
@@ -15,6 +15,7 @@ const AppRouter = () => {
         <Route path="/registro" element={<Registro />} /> 
         <Route path="/home" element={<Home />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/usuario" element={<Usuario />}/>
       
       </Routes>
     </Router>
