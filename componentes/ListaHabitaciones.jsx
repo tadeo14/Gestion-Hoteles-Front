@@ -44,7 +44,10 @@ export const ListaHabitaciones = () => {
                             <td>{habitaciones._id}</td>
                             <td>{habitaciones.numero}</td>
                             <td>{habitaciones.precio}</td>
-                            <td>{ habitaciones.tipo}</td>
+                          <td>{habitaciones.tipo}</td>
+                          <td>
+                          <img src={`http://localhost:5173/public/images/${habitaciones.imagen}`} alt={`Habitación ${habitaciones.numero}`} style={{ width: '100px', height: 'auto' }} />
+                          </td>
                           </tr>
                       )
                   })}
