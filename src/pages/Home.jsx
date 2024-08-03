@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Carousel } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 import "../assets/Home.css";
 import imagen1 from "../images/carrousel1.jpg";
 import imagen2 from "../images/carrousel2.jpg";
 import imagen3 from "../images/carrousel3.jpg";
 
 const Home = () => {
+  const navigate = useNavigate();
+  const { isAuthenticated } = useContext(AuthContext);
+
   return (
     <div className="home-container">
       <div className="carousel-container">
@@ -58,6 +63,16 @@ const Home = () => {
           el final de tu estancia, nuestro objetivo es superar tus expectativas
           y asegurar que cada aspecto de tu visita sea excepcional.
         </p>
+        {!isAuthenticated && (
+          <div className="button-container">
+            <button className="btn-login" onClick={() => navigate("/login")}>
+              Iniciar Sesión
+            </button>
+            <button className="btn-registro" onClick={() => navigate("/registro")}>
+              Registrarse
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import pruebaApi from "../api/pruebaApi";
+import { AuthContext } from "../context/AuthContext";
 import "../assets/Login.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [contraseña, setContraseña] = useState("");
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const loginBackend = async (email, contraseña) => {
@@ -24,14 +26,14 @@ const Login = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        navigate("/Home");
+        login();
+        navigate("/");
       }
     } catch (error) {
       if (error.response && error.response.status === 400) {
         Swal.fire({
           title: "Error",
-          text:
-            error.response.data.mensaje || "Correo o contraseña incorrectos.",
+          text: error.response.data.mensaje || "Correo o contraseña incorrectos.",
           icon: "error",
           confirmButtonText: "Aceptar",
         });
@@ -54,7 +56,6 @@ const Login = () => {
     setContraseña(e.target.value);
   };
 
-  // Validaciones
   const validarEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(String(email).toLowerCase());
@@ -86,8 +87,6 @@ const Login = () => {
   };
 
   return (
-    // Formulario de Login
-
     <div className="login-background">
       <Container className="d-flex justify-content-center align-items-center min-vh-100">
         <Row className="w-100">
