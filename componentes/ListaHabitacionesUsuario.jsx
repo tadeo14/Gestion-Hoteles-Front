@@ -26,30 +26,6 @@ export const ListaHabitacionesUsuario = () => {
         <>
             <div className='p-2'>
                 <h1>Listado de Habitaciones</h1>
-                <Table striped bordered hover>
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Numero</th>
-                            <th>Precio</th>
-                            <th>Tipo</th>
-                            <th>Imagen</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {habitaciones.map((habitacion) => (
-                            <tr key={habitacion._id}>
-                                <td>{habitacion._id}</td>
-                                <td>{habitacion.numero}</td>
-                                <td>{habitacion.precio}</td>
-                                <td>{habitacion.tipo}</td>
-                                <td>
-                                    <img src={`http://localhost:5173/public/images/${habitacion.imagen}`} alt={`Habitación ${habitacion.numero}`} style={{ width: '100px', height: 'auto' }} />
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </Table>
                 <div>
                     {habitaciones.map((habitacion) => (
                         <Row key={habitacion._id} className="mb-3">
