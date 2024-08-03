@@ -28,7 +28,7 @@ const Login = () => {
       
         // Redirige a la página principal
       localStorage.setItem("token", resp.data.token);
-      navigate("/Home");
+      navigate("/Usuario");
       
     } catch (error) {
       if (error.response && error.response.status === 400) {
