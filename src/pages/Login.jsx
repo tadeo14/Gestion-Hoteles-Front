@@ -33,7 +33,8 @@ const Login = () => {
       if (error.response && error.response.status === 400) {
         Swal.fire({
           title: "Error",
-          text: error.response.data.mensaje || "Correo o contraseña incorrectos.",
+          text:
+            error.response.data.mensaje || "Correo o contraseña incorrectos.",
           icon: "error",
           confirmButtonText: "Aceptar",
         });
@@ -115,7 +116,7 @@ const Login = () => {
                 </Form.Group>
 
                 <Button variant="primary" type="submit" className="w-100 mt-3">
-                  Iniciar Sesion
+                  Iniciar sesion
                 </Button>
                 <Button
                   variant="secondary"
