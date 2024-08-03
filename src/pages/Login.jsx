@@ -24,14 +24,12 @@ const Login = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-<<<<<<< HEAD
-        navigate("/Home");
-      }
-=======
+        
+      
         // Redirige a la página principal
       localStorage.setItem("token", resp.data.token);
+      navigate("/Home");
       
->>>>>>> externa
     } catch (error) {
       if (error.response && error.response.status === 400) {
         Swal.fire({
@@ -92,26 +90,7 @@ const Login = () => {
   };
 
   return (
-<<<<<<< HEAD
     // Formulario de Login
-=======
-    
-    <Container>
-      
-      <Row className="justify-content-md-center">
-        <Col md={4}>
-          <h2 className="text-center">Login</h2>
-          <Form onSubmit={manejarEnvio}>
-            <Form.Group controlId="formBasicEmail" className="mb-3">
-              <Form.Control
-                type="email"
-                placeholder="Ingrese su correo"
-                value={email}
-                onChange={handleEmail}
-                required
-              />
-            </Form.Group>
->>>>>>> externa
 
     <div className="login-background">
       <Container className="d-flex justify-content-center align-items-center min-vh-100">
