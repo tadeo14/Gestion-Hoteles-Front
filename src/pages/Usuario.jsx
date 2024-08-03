@@ -1,13 +1,13 @@
 import React from 'react'
 
-import ListadoReservasAdmin from '../../componentes/ListadoReservasAdmin'
 import ListadoReservasUsuario from '../../componentes/ListadoReservasUsuario';
+import ListaHabitacionesUsuario from '../../componentes/ListaHabitacionesUsuario';
 
 export const Usuario = () => {
   return (
       <>
-          <ListadoReservasUsuario />
-          
+      <ListadoReservasUsuario />
+      <ListaHabitacionesUsuario/>         
           
       </>
   )
