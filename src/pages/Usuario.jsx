@@ -5,9 +5,12 @@ import ListaHabitacionesUsuario from '../../componentes/ListaHabitacionesUsuario
 
 export const Usuario = () => {
   return (
-      <>
+    <>
+      <div className='p-4'>
       <ListadoReservasUsuario />
-      <ListaHabitacionesUsuario/>         
+      <ListaHabitacionesUsuario/> 
+      </div>
+              
           
       </>
   )

@@ -3,6 +3,7 @@ import Table from 'react-bootstrap/Table'; // Asegúrate de importar Table desde
 import pruebaApi from '../src/api/pruebaApi';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
+import Container from 'react-bootstrap/Container';
 
 export const ListaHabitacionesUsuario = () => {
     const [habitaciones, setHabitaciones] = React.useState([]);
@@ -27,8 +28,9 @@ export const ListaHabitacionesUsuario = () => {
 
 
   return (
-    <>
-      <h1>Listado de Habitaciones</h1>
+      <>
+          <div className='p-2'>
+          <h1 >  Listado de Habitaciones</h1>
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -58,21 +60,25 @@ export const ListaHabitacionesUsuario = () => {
           </Table>
           <div>
           <CardGroup>
-      <Card>
-        <Card.Img variant="top" src="holder.js/100px160" />
-        <Card.Body>
-          <Card.Title>Card title</Card.Title>
-          <Card.Text>
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content. This content is a little bit longer.
-          </Card.Text>
-        </Card.Body>
-        <Card.Footer>
-          <small className="text-muted">Last updated 3 mins ago</small>
-        </Card.Footer>
-                  </Card>
-                  </CardGroup>
+                        {habitaciones.map((habitacion) => (
+                            <Card key={habitacion._id}>
+                                <Card.Img variant="left" src={`http://localhost:5173/public/images/${habitacion.imagen}`} alt={`Habitación ${habitacion.numero}`} style={{ width: '300px', height: 'auto' }}  />
+                                <Card.Body>
+                                    <Card.Title>Habitación {habitacion.numero}</Card.Title>
+                                    <Card.Text>
+                                        Tipo: {habitacion.tipo}<br />
+                                        Precio: ${habitacion.precio}
+                                    </Card.Text>
+                                </Card.Body>
+                                <Card.Footer>
+                                    <small className="text-muted">Última actualización hace 3 minutos</small>
+                                </Card.Footer>
+                            </Card>
+                        ))}
+                    </CardGroup>
           </div>
+          </div>
+     
     </>
   );
 };
