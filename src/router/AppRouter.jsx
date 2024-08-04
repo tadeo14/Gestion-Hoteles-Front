@@ -5,6 +5,7 @@ import Login from "../pages/Login.jsx";
 import Registro from "../pages/Registro.jsx";
 import Home from "../pages/Home.jsx";
 import Navbar from "../pages/Navbar.jsx"
+import Error404 from "../pages/Error404.jsx";
 
 
 const AppRouter = () => {
@@ -15,6 +16,7 @@ const AppRouter = () => {
       <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Registro />} /> 
+        <Route path="*" element={<Error404 />} />
       </Routes>
     </Router>
   );

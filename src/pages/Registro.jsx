@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import pruebaApi from '../api/pruebaApi';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 export const Registro = () => {
   const [nombre, setNombre] = useState('');
