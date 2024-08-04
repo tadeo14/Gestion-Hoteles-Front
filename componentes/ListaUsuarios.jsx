@@ -18,7 +18,14 @@ export const ListaUsuarios = () => {
         getUsuarios();
     }, []);
 
-
+  //funcion encargada de elimar producto
+  const eliminarUsuarioClick = async (id) => {
+    try {
+      console.log(id)
+    } catch (error) {
+      
+    }
+  }
 
 
 
@@ -44,8 +51,8 @@ export const ListaUsuarios = () => {
                           <td>{usuario.nombre}</td>
                           <td>{usuario.email}</td>
                           <td>
-                            <button className='btn btn-info'>Editar</button>
-                            <button className='btn btn-danger'>Eliminar</button>
+                            <button  className='btn btn-info'>Editar</button>
+                            <button onClick={()=>eliminarUsuarioClick(usuario._id)} className='btn btn-danger'>Eliminar</button>
                           </td>
                           </tr>
                       )
