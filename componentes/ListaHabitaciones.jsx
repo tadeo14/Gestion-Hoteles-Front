@@ -129,7 +129,14 @@ const editarHabitacion = async (habitaciones) => {
   }
 }
 
-//funcion para leer los cambios en el formulario
+  //funcion para leer los cambios en el formulario
+  const handleChangeEditar = (propiedad,valor) => { 
+    setHabitacionesEditar({
+      ...habitacionesEditar,
+      [propiedad]: valor,
+    })
+  }
+
 
 
   return (
