@@ -4,14 +4,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "../pages/Login.jsx";
 import Registro from "../pages/Registro.jsx";
 import Home from "../pages/Home.jsx";
-<<<<<<< HEAD
-import AdminPage from "../pages/AdminPage.jsx";
-import UserPage from "../pages/UserPage.jsx";
-import PrivateRouteAdmin from "../routes/PrivateRouteAdmin.js";
-import PrivateRoute from "../routes/PrivateRoute.js";
-=======
 import Navbar from "../pages/Navbar.jsx"
->>>>>>> f7d1eb9f99dd4a955b7a555a2f9e5baa55fc01ca
+import Error404 from "../pages/Error404.jsx";
 
 
 const AppRouter = () => {
@@ -22,26 +16,7 @@ const AppRouter = () => {
       <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Registro />} /> 
-<<<<<<< HEAD
-        <Route path="/home" element={<Home />} />
-        <Route
-                path="/admin"
-                element={
-                  <PrivateRouteAdmin>
-                    <AdminPage />
-                  </PrivateRouteAdmin>
-                }
-              />
-         <Route
-                path="/users"
-                element={
-                  <PrivateRoute>
-                    <UserPage />
-                  </PrivateRoute>
-                }
-              />
-=======
->>>>>>> f7d1eb9f99dd4a955b7a555a2f9e5baa55fc01ca
+        <Route path="*" element={<Error404 />} />
       </Routes>
     </Router>
   );
