@@ -1,0 +1,55 @@
+/* src/assets/Navbar.css */
+
+.custom-navbar {
+  background-color: #fff;
+  padding: 10px 20px;
+}
+
+.custom-navbar .navbar-brand,
+.custom-navbar .nav-link {
+  color: #000;
+  font-weight: bold;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.custom-navbar .navbar-brand:hover,
+.custom-navbar .nav-link:hover {
+  color: #d4af37; /* Dorado */
+  background-color: transparent;
+}
+
+.custom-navbar .navbar-toggler {
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.custom-navbar .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+@media (max-width: 768px) {
+  .custom-navbar .navbar-collapse {
+    background-color: #fff;
+  }
+
+  .custom-navbar .nav-link {
+    color: #000;
+    font-weight: bold;
+  }
+
+  .custom-navbar .nav-link:hover {
+    color: #d4af37;
+    background-color: transparent;
+  }
+}
+
+.custom-navbar .btn-logout {
+  color: #fff;
+  background-color: #dc3545; /* Rojo */
+  border: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.custom-navbar .btn-logout:hover {
+  background-color: #c82333; /* Rojo más oscuro */
+  color: #fff;
+}
