@@ -111,12 +111,12 @@ const editarHabitacion = async (habitaciones) => {
     // });
     setShowEditar(true);
 
-    Swal.fire({
-      title: "Habitación modificada",
-      icon: "success",
-      showConfirmButton: false,
-      timer: 1500,
-    });
+    // Swal.fire({
+    //   title: "Habitación modificada",
+    //   icon: "success",
+    //   showConfirmButton: false,
+    //   timer: 1500,
+    // });
     getHabitaciones(); // Actualizar la lista de habitaciones después de la modificación
   } catch (error) {
     console.log(error);
@@ -129,7 +129,7 @@ const editarHabitacion = async (habitaciones) => {
   }
 }
 
-
+//funcion para leer los cambios en el formulario
 
 
   return (
@@ -197,7 +197,7 @@ const editarHabitacion = async (habitaciones) => {
                 type="number"
                 placeholder="105"
                 value={habitacionesEditar.numero}
-                onChange={(e) => setNumero(e.target.value)}
+                onChange={(e) => handleChangeEditar ('numero',e.target.value)}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="tipo">
@@ -206,7 +206,7 @@ const editarHabitacion = async (habitaciones) => {
                 type="text"
                 placeholder="Familiar"
                 value={habitacionesEditar.tipo}
-                onChange={(e) => setTipo(e.target.value)}
+                onChange={(e) => handleChangeEditar ('tipo',e.target.value)}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="precio">
@@ -215,7 +215,7 @@ const editarHabitacion = async (habitaciones) => {
                 type="number"
                 placeholder="10000"
                 value={habitacionesEditar.precio}
-                onChange={(e) => setPrecio(e.target.value)}
+                onChange={(e) => handleChangeEditar ('precio',e.target.value)}
               />
             </Form.Group>
             <Modal.Footer>
