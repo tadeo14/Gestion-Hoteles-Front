@@ -1,55 +1,48 @@
 import React, { useEffect } from 'react';
-import Table from 'react-bootstrap/Table'; // Asegúrate de importar Table desde react-bootstrap
-import pruebaApi from '../src/api/pruebaApi';
+import Table from 'react-bootstrap/Table';
+import pruebaApi from '../src/api/pruebaApi'; 
 
 export const ListadoReservasAdmin = () => {
-    const [reservas, setReservas] = React.useState([]);
+  const [reservas, setReservas] = React.useState([]);
 
-    const getReservas = async () => {
-        try {
-            const resp = await pruebaApi.get('room/listadoReservas');
-            setReservas(resp.data.listadoReservas);
-            //setHabitaciones(resp.data.);
-        } catch (error) {
-            console.log(error);
-        }
+  const getReservas = async () => {
+    try {
+      const resp = await pruebaApi.get('room/listadoReservas');
+      setReservas(resp.data.listadoReservas);
+    } catch (error) {
+      console.log(error);
     }
+  }
 
-    useEffect(() => {
-        getReservas();
-    }, []);
-
-
-
-
-
+  useEffect(() => {
+    getReservas();
+  }, []);
 
   return (
     <>
-      <h1>Listado de Reservas</h1>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Usuario</th>
-            <th>Fecha Inicio</th>
-            <th>Fecha Fin</th>
-            
-          </tr>
-        </thead>
-                <tbody>
-                  {reservas.map((reservas) => {
-                      return (
-                        <tr > 
-                              <td>{reservas._id}</td>
-                              <td>{reservas.usuario}</td>
-                              <td>{reservas.fechaInicio}</td>
-                              <td>{reservas.fechaFin}</td>
-                          </tr>
-                      )
-                  })}
-                </tbody>
-      </Table>
+      <h1 className="text-center my-4">Listado de Reservas</h1>
+      <div className="table-responsive">
+        <Table striped bordered hover className="table-custom">
+          <thead className="thead-dark">
+            <tr>
+              <th>#</th>
+              <th>Usuario</th>
+              <th>Fecha Inicio</th>
+              <th>Fecha Fin</th>
+            </tr>
+          </thead>
+          <tbody>
+            {reservas.map((reserva) => (
+              <tr key={reserva._id}>
+                <td>{reserva._id}</td>
+                <td>{reserva.usuario}</td>
+                <td>{reserva.fechaInicio}</td>
+                <td>{reserva.fechaFin}</td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>
     </>
   );
 };

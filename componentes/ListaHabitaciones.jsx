@@ -1,43 +1,32 @@
-import React, { useEffect } from 'react';
-import Table from 'react-bootstrap/Table'; // Asegúrate de importar Table desde react-bootstrap
+import React, { useEffect, useState } from 'react';
+import { Table, Button, Modal, Form, Card } from 'react-bootstrap';
 import pruebaApi from '../src/api/pruebaApi';
-import { useState } from 'react';
-import Swal from "sweetalert2";
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import { Form } from 'react-bootstrap';
-
+import Swal from 'sweetalert2';
 
 export const ListaHabitaciones = () => {
-  const [habitaciones, setHabitaciones] = React.useState([]);
+  const [habitaciones, setHabitaciones] = useState([]);
   const [show, setShow] = useState(false);
-  const [numero, setNumero] = useState('')
-  const [tipo, setTipo] = useState('')
-
-  const [precio, setPrecio] = useState('')
+  const [numero, setNumero] = useState('');
+  const [tipo, setTipo] = useState('');
+  const [precio, setPrecio] = useState('');
   const [showEditar, setShowEditar] = useState(false);
   const [habitacionesEditar, setHabitacionesEditar] = useState([]);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-
-    const getHabitaciones = async () => {
-        try {
-            const resp = await pruebaApi.get('admin/habitaciones');
-            setHabitaciones(resp.data.habitaciones);
-            //setHabitaciones(resp.data.);
-        } catch (error) {
-            console.log(error);
-        }
+  const getHabitaciones = async () => {
+    try {
+      const resp = await pruebaApi.get('admin/habitaciones');
+      setHabitaciones(resp.data.habitaciones);
+    } catch (error) {
+      console.log(error);
     }
+  }
 
-    useEffect(() => {
-        getHabitaciones();
-    }, []);
-  
-  
-  
-  //funcion que envia la habitacion al backend
+  useEffect(() => {
+    getHabitaciones();
+  }, []);
+
   const crearHabitacionBackend = async () => {
     try {
       const resp = await pruebaApi.post('/admin/crearHabitacion', {
@@ -46,52 +35,42 @@ export const ListaHabitaciones = () => {
         precio,
       });
       Swal.fire({
-        title: "Creacion exitosa",
+        title: "Creación exitosa",
         icon: "success",
         showConfirmButton: false,
         timer: 1500,
       });
-      
-      getHabitaciones(); // Actualizar la lista de habitaciones
-      handleClose(); // Cerrar el modal después de la creación
+      getHabitaciones();
+      handleClose();
+      setNumero('');
+      setTipo('');
+      setPrecio('');
     } catch (error) {
-      if (error.response && error.response.status === 400) {
-        Swal.fire({
-          title: "Error",
-          text:
-            error.response.data.mensaje || "Correo o contraseña incorrectos.",
-          icon: "error",
-          confirmButtonText: "Aceptar",
-        });
-      } else {
-        Swal.fire({
-          title: "Error",
-          text: "Ocurrió un problema. Por favor, inténtalo de nuevo más tarde.",
-          icon: "error",
-          confirmButtonText: "Aceptar",
-        });
-      }
+      Swal.fire({
+        title: "Error",
+        text: error.response?.data.mensaje || "Ocurrió un problema. Por favor, inténtalo de nuevo más tarde.",
+        icon: "error",
+        confirmButtonText: "Aceptar",
+      });
     }
   };
-//funcion encargada de ejecutar el submit
-const handleCrearHabitacion = (e) => {
-  e.preventDefault();
-  crearHabitacionBackend();
-};
+
+  const handleCrearHabitacion = (e) => {
+    e.preventDefault();
+    crearHabitacionBackend();
+  };
 
   const eliminarHabitacionClick = async (id) => {
     try {
       const resp = await pruebaApi.delete(`/admin/eliminarHabitacion/${id}`);
-      console.log(resp);
       Swal.fire({
         title: "Habitación eliminada",
         icon: "success",
         showConfirmButton: false,
         timer: 1500,
       });
-      getHabitaciones(); // Actualizar la lista de habitaciones después de la eliminación
+      getHabitaciones();
     } catch (error) {
-      console.log(error);
       Swal.fire({
         title: "Error",
         text: "Ocurrió un problema al eliminar la habitación.",
@@ -99,70 +78,51 @@ const handleCrearHabitacion = (e) => {
         confirmButtonText: "Aceptar",
       });
     }
-  }
-//funcion que modificara la habitacion
-const editarHabitacion = async (habitaciones) => {
-  try {
-    setHabitacionesEditar(habitaciones)    
-    setShowEditar(true);
-  
-    getHabitaciones(); // Actualizar la lista de habitaciones después de la modificación
-  } catch (error) {
-    console.log(error);
-    Swal.fire({
-      title: "Error",
-      text: "Ocurrió un problema al modificar la habitación.",
-      icon: "error",
-      confirmButtonText: "Aceptar",
-    });
-  }
-}
+  };
 
-  //funcion para leer los cambios en el formulario
-  const handleChangeEditar = (propiedad,valor) => { 
+  const editarHabitacion = (habitaciones) => {
+    setHabitacionesEditar(habitaciones);
+    setShowEditar(true);
+  };
+
+  const handleChangeEditar = (propiedad, valor) => {
     setHabitacionesEditar({
       ...habitacionesEditar,
       [propiedad]: valor,
-    })
-  }
+    });
+  };
 
   const editarHabitacionesBackend = async (habitaciones) => {
     const { tipo, numero, precio, _id } = habitaciones;
     try {
-    const resp = await pruebaApi.put(`/admin/editarHabitacion`, {
-      tipo,
-      numero,
-      precio,
-      _id
-    });
-    Swal.fire({
-      title: "Habitación modificada",
-      icon: "success",
-      showConfirmButton: false,
-      timer: 1500,
-    });
-  } catch (error)  {
-    console.log('Error al actualizar habitación:', error.response ? error.response.data : error.message);
-    Swal.fire({
-      title: 'Error',
-      text: error.response?.data.msg || 'Ocurrió un problema al actualizar la habitación.',
-      icon: 'error',
-      confirmButtonText: 'Aceptar',
-    });
-    
-    
-  }
-}
+      const resp = await pruebaApi.put(`/admin/editarHabitacion`, {
+        tipo,
+        numero,
+        precio,
+        _id
+      });
+      Swal.fire({
+        title: "Habitación modificada",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      getHabitaciones();
+      setShowEditar(false);
+    } catch (error) {
+      Swal.fire({
+        title: 'Error',
+        text: error.response?.data.msg || 'Ocurrió un problema al actualizar la habitación.',
+        icon: 'error',
+        confirmButtonText: 'Aceptar',
+      });
+    }
+  };
 
   const handleEditarHabitacion = (e) => {
     e.preventDefault();
-
-    //validaciones
-
     editarHabitacionesBackend(habitacionesEditar);
-  }
-
-
+  };
 
   return (
     <>
@@ -206,7 +166,7 @@ const editarHabitacion = async (habitaciones) => {
             </Form.Group>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleClose}>
-                Close
+                Cerrar
               </Button>
               <Button variant="primary" type="submit">
                 Guardar
@@ -216,10 +176,9 @@ const editarHabitacion = async (habitaciones) => {
         </Modal.Body>
       </Modal>
 
-      {/* modal editar habitacion */}
-      <Modal show={showEditar} >
-        <Modal.Header >
-          <Modal.Title>Editar habitacion</Modal.Title>
+      <Modal show={showEditar}>
+        <Modal.Header>
+          <Modal.Title>Editar habitación</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleEditarHabitacion}>
@@ -229,7 +188,7 @@ const editarHabitacion = async (habitaciones) => {
                 type="number"
                 placeholder="105"
                 value={habitacionesEditar.numero}
-                onChange={(e) => handleChangeEditar ('numero',e.target.value)}
+                onChange={(e) => handleChangeEditar('numero', e.target.value)}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="tipo">
@@ -238,7 +197,7 @@ const editarHabitacion = async (habitaciones) => {
                 type="text"
                 placeholder="Familiar"
                 value={habitacionesEditar.tipo}
-                onChange={(e) => handleChangeEditar ('tipo',e.target.value)}
+                onChange={(e) => handleChangeEditar('tipo', e.target.value)}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="precio">
@@ -247,14 +206,14 @@ const editarHabitacion = async (habitaciones) => {
                 type="number"
                 placeholder="10000"
                 value={habitacionesEditar.precio}
-                onChange={(e) => handleChangeEditar ('precio',e.target.value)}
+                onChange={(e) => handleChangeEditar('precio', e.target.value)}
               />
             </Form.Group>
             <Modal.Footer>
-              <Button variant="secondary" onClick={()=> setShowEditar(false)}>
-                Close
+              <Button variant="secondary" onClick={() => setShowEditar(false)}>
+                Cerrar
               </Button>
-              <Button variant="primary" type="submit" onClick={() => setShowEditar(false)}>
+              <Button variant="primary" type="submit">
                 Guardar
               </Button>
             </Modal.Footer>
@@ -262,36 +221,22 @@ const editarHabitacion = async (habitaciones) => {
         </Modal.Body>
       </Modal>
 
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Numero</th>
-            <th>Precio</th>
-            <th>Tipo</th>
-            
-          </tr>
-        </thead>
-                <tbody>
-                  {habitaciones.map((habitaciones) => {
-                      return (
-                          <tr>
-                            <td>{habitaciones._id}</td>
-                            <td>{habitaciones.numero}</td>
-                            <td>{habitaciones.precio}</td>
-                          <td>{habitaciones.tipo}</td>
-                          <td>
-                          <img src={`http://localhost:5173/public/images/${habitaciones.imagen}`} alt={`Habitación ${habitaciones.numero}`} style={{ width: '100px', height: 'auto' }} />
-                          </td>
-                          <td>
-                          <button onClick={()=>editarHabitacion(habitaciones)} className='btn btn-info'>Modificar</button>
-                          <button onClick={() => eliminarHabitacionClick(habitaciones._id)} className='btn btn-danger'>Eliminar</button>
-                          </td>
-                          </tr>
-                      )
-                  })}
-                </tbody>
-      </Table>
+      <div className="d-flex flex-wrap justify-content-center">
+        {habitaciones.map((habitacion) => (
+          <Card key={habitacion._id} className="m-2" style={{ width: '18rem', flex: '1 1 calc(100% - 2rem)', maxWidth: '300px' }}>
+            <Card.Img variant="top" src={`http://localhost:5173/public/images/${habitacion.imagen}`} alt={`Habitación ${habitacion.numero}`} style={{ height: '200px', objectFit: 'cover' }} />
+            <Card.Body>
+              <Card.Title>Habitación {habitacion.numero}</Card.Title>
+              <Card.Text>
+                Tipo: {habitacion.tipo} <br />
+                Precio: {habitacion.precio}
+              </Card.Text>
+              <Button variant="info" onClick={() => editarHabitacion(habitacion)} className='me-2'>Modificar</Button>
+              <Button variant="danger" onClick={() => eliminarHabitacionClick(habitacion._id)}>Eliminar</Button>
+            </Card.Body>
+          </Card>
+        ))}
+      </div>
     </>
   );
 };

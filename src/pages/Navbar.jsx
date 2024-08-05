@@ -5,7 +5,7 @@ import "../assets/Navbar.css";
 import { AuthContext } from "../context/AuthContext";
 
 const Navbar = () => {
-  const { isAuthenticated, logout } = useContext(AuthContext);
+  const { isAuthenticated, userRole, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleReservationsClick = (e) => {
@@ -77,6 +77,13 @@ const Navbar = () => {
                 NOSOTROS
               </Link>
             </li>
+            {isAuthenticated && userRole === "Admin" && (
+              <li className="nav-item">
+                <Link className="nav-link" to="/admin">
+                  Administración
+                </Link>
+              </li>
+            )}
             {isAuthenticated && (
               <li className="nav-item">
                 <button className="btn btn-logout" onClick={handleLogout}>
