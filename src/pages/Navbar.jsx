@@ -33,7 +33,7 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg custom-navbar">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
-          Hotel
+          Hotel Rolling
         </Link>
         <button
           className="navbar-toggler"
@@ -56,10 +56,15 @@ const Navbar = () => {
             <li className="nav-item">
               <Link
                 className="nav-link"
-                to="/reservas"
+                to="/usuario"
                 onClick={handleReservationsClick}
               >
                 RESERVAS
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/contacto">
+                CONTACTO
               </Link>
             </li>
             <li className="nav-item">

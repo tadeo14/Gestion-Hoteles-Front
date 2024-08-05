@@ -1,21 +1,23 @@
-import React, { useState } from 'react'
-import { Button, Form } from 'react-bootstrap'
+import React, { useState } from 'react';
+import { Button, Container, Form, Row } from 'react-bootstrap';
 import pruebaApi from '../api/pruebaApi';
 import Swal from 'sweetalert2';
+import "../assets/Registro.css"
+
 
 export const Registro = () => {
   const [nombre, setNombre] = useState('');
-  const [edad, setEdad] = useState('');
   const [email, setEmail] = useState('');
   const [contraseña, setContraseña] = useState('');
+  const [confirmarContraseña, setConfirmarContraseña] = useState('');
 
-  const registroBackend = async(nombre, edad, email, contraseña) => { 
+  const registroBackend = async(nombre, email, contraseña, confirmarContraseña) => { 
     try {
       const resp = await pruebaApi.post("/auth/registro", {
         nombre,
-        edad,
         email,
         contraseña,
+        confirmarContraseña,
       })
       Swal.fire({
         position: "center",
@@ -43,42 +45,72 @@ export const Registro = () => {
 
   const handleRegistro = (e) =>{
     e.preventDefault(); 
+  
     //validaciones
-   if (nombre === '' || edad === '' || email === '' || contraseña === '') {
-    console.log('todos los campos son obligarios')
-   }   
     
-    registroBackend(nombre, edad, email, contraseña)
-  }
+      if (nombre === '' || email === '' || contraseña === '' || confirmarContraseña === ''){
+        Swal.fire({
+          title: "Error",
+          text: "Todos los campos son obligatorios.",
+          icon: "error",
+          confirmButtonText: "Aceptar",
+        });
+      }else if (contraseña.length < 5){
+        Swal.fire({
+          title: "Error",
+          text: "la contraseña debe ser mayor a 5.",
+          icon: "error",
+          confirmButtonText: "Aceptar",
+        });
+      }else if (contraseña !== confirmarContraseña) {
+        Swal.fire({
+          title: "Error",
+          text: "la contraseña deben ser iguales.",
+          icon: "error",
+          confirmButtonText: "Aceptar",
+        });
+      }else{
+        registroBackend(nombre, email, contraseña, confirmarContraseña)
+      }
+    }
+  
   return (
-    <div className='justify-content-md-center row text-center'>
-      <h1> Registro</h1>
-      <Form className='w-50 p-3' onSubmit={handleRegistro}>
-      <Form.Group className="mb-3" controlId="formBasicNombre">
-        <Form.Label>Nombre</Form.Label>
-        <Form.Control type="text" onChange={(e) => setNombre(e.target.value)}/>
-      </Form.Group>
+    
+  <div className='Registro-background'>
+    <Container className="d-flex justify-content-center align-items-center min-vh-100">
+      <Row className='w-100'>
+        <div className='form-container'>
+          <h2 className="text-center">Registro</h2>
+         <Form onSubmit={handleRegistro}>
+         <Form.Group className="mb-3" controlId="formBasicNombre">
+          <Form.Label >Nombre</Form.Label>
+          <Form.Control type="text" onChange={(e) => setNombre(e.target.value)} />
+         </Form.Group>
+  
+         <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Correo electronico</Form.Label>
+          <Form.Control type="email" placeholder="@gmail.com" onChange={(e) => setEmail(e.target.value)} />
+         </Form.Group>
+  
+         <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Contraseña</Form.Label>
+          <Form.Control type="password" placeholder="escribir contraseña" onChange={(e) => setContraseña(e.target.value)} />
+         </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicEdad">
-        <Form.Label>Edad</Form.Label>
-        <Form.Control type="number" onChange={(e) => setEdad(e.target.value)}/>
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Correo electronico</Form.Label>
-        <Form.Control type="email" placeholder="@gmail.com" onChange={(e) => setEmail(e.target.value)}/>
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Contraseña</Form.Label>
-        <Form.Control type="password" placeholder="escribir contraseña" onChange={(e) => setContraseña(e.target.value)}/>
-      </Form.Group>
-      
-      <Button variant="primary" type="submit">
-        Registrarse
-      </Button>
-    </Form>
-    </div>
+         <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Confirmar Contraseña</Form.Label>
+          <Form.Control type="password" placeholder="confirmar contraseña" onChange={(e) => setConfirmarContraseña(e.target.value)} />
+         </Form.Group>
+        
+         <Button variant="primary" type="submit" className="w-100 mt-3">
+          Registrarse
+         </Button>
+         </Form>
+      </div>
+      </Row>
+    </Container>
+  </div>
+  
   )
 }
 export default Registro;
