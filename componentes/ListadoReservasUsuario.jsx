@@ -57,4 +57,25 @@ export const ListadoReservasUsuario = ({usuario}) => {
   );
 };
 
+const cancelarReserva = async (id) => {
+  try {
+    const resp = await pruebaApi.delete(`/room/reservas/${id}`);
+    console.log(resp);
+    Swal.fire({
+      title: "Habitación eliminada",
+      icon: "success",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+    getHabitaciones(); // Actualizar la lista de habitaciones después de la eliminación
+  } catch (error) {
+    console.log(error);
+    Swal.fire({
+      title: "Error",
+      text: "Ocurrió un problema al eliminar la habitación.",
+      icon: "error",
+      confirmButtonText: "Aceptar",
+    });
+  }
+}
 export default ListadoReservasUsuario;
