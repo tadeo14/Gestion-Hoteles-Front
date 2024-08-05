@@ -1,0 +1,36 @@
+.galeria-background {
+  background-image: url(../images/galeria5.jpg);
+  color: white;
+  background-size: cover;
+  padding: 20px;
+}
+
+.imagenesGaleria {
+  margin: 10px;
+  border-radius: 20px;
+  width: 100%;
+  height: auto;
+  max-width: 300px;
+}
+
+.slick-arrow {
+  border-radius: 20px;
+  background-color: rgb(70, 76, 87);
+  color: rgb(241, 169, 25);
+}
+
+@media (max-width: 1024px) {
+  .imagenesGaleria {
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .imagenesGaleria {
+    max-width: 150px;
+  }
+
+  .slick-arrow {
+    display: none; /* Oculta las flechas de navegación en pantallas más pequeñas */
+  }
+}
