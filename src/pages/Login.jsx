@@ -26,12 +26,7 @@ const Login = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        login();
-        
-      }
-        
-      
-        // Redirige a la página principal
+      login();
       localStorage.setItem("token", resp.data.token);
       navigate("/Usuario");
       
