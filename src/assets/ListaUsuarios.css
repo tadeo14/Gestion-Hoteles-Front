@@ -1,0 +1,45 @@
+.table-custom {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table-custom th, .table-custom td {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.thead-dark th {
+  background-color: #343a40;
+  color: white;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+@media (max-width: 768px) {
+  .table-custom th, .table-custom td {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+
+  .table-custom th {
+    display: none;
+  }
+
+  .table-custom td {
+    border: none;
+    padding: 0.75rem 1.25rem;
+    position: relative;
+  }
+
+  .table-custom td:before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding-left: 1.25rem;
+    font-weight: bold;
+  }
+}

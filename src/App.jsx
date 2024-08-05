@@ -1,13 +1,17 @@
-import { useState } from 'react'
-import viteLogo from '/vite.svg'
+import { useState } from "react";
+import viteLogo from "/vite.svg";
+import "bootstrap/dist/css/bootstrap.min.css";
+import AppRouter from "./router/AppRouter";
+import { Navbar } from "react-bootstrap";
+import { AuthProvider } from "../src/context/AuthContext";
 
 function App() {
-
   return (
-    <>
-      <h1>Gestor de hoteles</h1>
-    </>
-  )
+    <AuthProvider>
+    
+      <AppRouter />
+    </AuthProvider>
+  );
 }
 
-export default App
+export default App;

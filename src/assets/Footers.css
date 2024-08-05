@@ -1,0 +1,27 @@
+.footers-background {
+  background-color: #f8f9fa;
+  padding-top: 1rem;
+}
+
+.nav-link {
+  color: #6c757d;
+  transition: color 0.2s ease-in-out;
+}
+
+.nav-link:hover {
+  color: #495057;
+}
+
+.text-body-secondary {
+  color: #6c757d !important;
+}
+
+@media (max-width: 576px) {
+  .nav {
+    flex-direction: column;
+  }
+
+  .nav-link {
+    padding: 0.5rem 0;
+  }
+}

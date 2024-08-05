@@ -1,0 +1,59 @@
+.login-background {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background: url('../images/istockphoto-1418784247-612x612.jpg') no-repeat center center fixed;
+  background-size: cover; 
+}
+
+/* Estilo del contenedor del formulario */
+.form-container {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: rgba(249, 249, 249, 0.9); /* Fondo blanco semi-transparente para el formulario */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: auto;
+}
+
+/* Centrar el formulario en la página */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Ajustar el ancho del formulario */
+.col-md-4 {
+  width: 100%;
+}
+
+/* Estilo para el título */
+.text-center {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Botones */
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #004080;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+  border-color: #545b62;
+}
