@@ -13,6 +13,7 @@ export const ListaHabitaciones = () => {
   const [show, setShow] = useState(false);
   const [numero, setNumero] = useState('')
   const [tipo, setTipo] = useState('')
+
   const [precio, setPrecio] = useState('')
   const [showEditar, setShowEditar] = useState(false);
   const [habitacionesEditar, setHabitacionesEditar] = useState([]);
@@ -102,21 +103,9 @@ const handleCrearHabitacion = (e) => {
 //funcion que modificara la habitacion
 const editarHabitacion = async (habitaciones) => {
   try {
-    setHabitacionesEditar(habitaciones)
-    // const resp = await pruebaApi.put(`/admin/editarHabitacion/${habitaciones._id}`, {
-      
-      // numero: habitaciones.numero,
-      // tipo: habitaciones.tipo,
-      // precio: habitaciones.precio,
-    // });
+    setHabitacionesEditar(habitaciones)    
     setShowEditar(true);
-
-    // Swal.fire({
-    //   title: "Habitación modificada",
-    //   icon: "success",
-    //   showConfirmButton: false,
-    //   timer: 1500,
-    // });
+  
     getHabitaciones(); // Actualizar la lista de habitaciones después de la modificación
   } catch (error) {
     console.log(error);
@@ -135,6 +124,42 @@ const editarHabitacion = async (habitaciones) => {
       ...habitacionesEditar,
       [propiedad]: valor,
     })
+  }
+
+  const editarHabitacionesBackend = async (habitaciones) => {
+    const { tipo, numero, precio, _id } = habitaciones;
+    try {
+    const resp = await pruebaApi.put(`/admin/editarHabitacion`, {
+      tipo,
+      numero,
+      precio,
+      _id
+    });
+    Swal.fire({
+      title: "Habitación modificada",
+      icon: "success",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  } catch (error)  {
+    console.log('Error al actualizar habitación:', error.response ? error.response.data : error.message);
+    Swal.fire({
+      title: 'Error',
+      text: error.response?.data.msg || 'Ocurrió un problema al actualizar la habitación.',
+      icon: 'error',
+      confirmButtonText: 'Aceptar',
+    });
+    
+    
+  }
+}
+
+  const handleEditarHabitacion = (e) => {
+    e.preventDefault();
+
+    //validaciones
+
+    editarHabitacionesBackend(habitacionesEditar);
   }
 
 
@@ -193,11 +218,11 @@ const editarHabitacion = async (habitaciones) => {
 
       {/* modal editar habitacion */}
       <Modal show={showEditar} >
-        <Modal.Header closeButton>
+        <Modal.Header >
           <Modal.Title>Editar habitacion</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form >
+          <Form onSubmit={handleEditarHabitacion}>
             <Form.Group className="mb-3" controlId="numero">
               <Form.Label>Número de Habitación</Form.Label>
               <Form.Control
@@ -229,7 +254,7 @@ const editarHabitacion = async (habitaciones) => {
               <Button variant="secondary" onClick={()=> setShowEditar(false)}>
                 Close
               </Button>
-              <Button variant="primary" type="submit">
+              <Button variant="primary" type="submit" onClick={() => setShowEditar(false)}>
                 Guardar
               </Button>
             </Modal.Footer>
