@@ -20,6 +20,7 @@ export const ListaUsuarios = () => {
     getUsuarios();
   }, []);
 
+  //funcion encargada de elimar usuario
   const eliminarUsuarioClick = async (id) => {
     try {
       console.log(id)
