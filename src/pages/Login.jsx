@@ -18,7 +18,7 @@ const Login = () => {
         email,
         contraseña,
       });
-      if (resp.status === 200) {
+      
         Swal.fire({
           title: "Inicio de sesión exitoso",
           text: "Has iniciado sesión correctamente.",
@@ -26,9 +26,10 @@ const Login = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        login();
-        navigate("/");
-      }
+      login();
+      localStorage.setItem("token", resp.data.token);
+      navigate("/Usuario");
+      
     } catch (error) {
       if (error.response && error.response.status === 400) {
         Swal.fire({

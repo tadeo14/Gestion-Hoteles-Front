@@ -6,7 +6,8 @@ import Registro from "../pages/Registro.jsx";
 import Home from "../pages/Home.jsx";
 import Navbar from "../pages/Navbar.jsx"
 import Error404 from "../pages/Error404.jsx";
-
+import { Admin } from "../pages/Admin.jsx";
+import {Usuario} from "../pages/Usuario.jsx"
 
 const AppRouter = () => {
   return (
@@ -17,6 +18,9 @@ const AppRouter = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Registro />} /> 
         <Route path="*" element={<Error404 />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/usuario" element={<Usuario />}/>
+      
       </Routes>
     </Router>
   );
