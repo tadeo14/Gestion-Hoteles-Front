@@ -12,7 +12,7 @@ const Login = () => {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const loginBackend = async (email, contraseña) => {
+  const loginBackend = async (email,contraseña) => {
     try {
       const resp = await pruebaApi.post("/auth/login", {
         email,
@@ -26,8 +26,7 @@ const Login = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        login();
-        navigate("/");
+        console.log(resp)
       }
     } catch (error) {
       if (error.response && error.response.status === 400) {
