@@ -20,6 +20,10 @@ export const ListaUsuarios = () => {
     getUsuarios();
   }, []);
 
+<<<<<<< HEAD
+=======
+  //funcion encargada de elimar usuario
+>>>>>>> reserva
   const eliminarUsuarioClick = async (id) => {
     try {
       console.log(id)
