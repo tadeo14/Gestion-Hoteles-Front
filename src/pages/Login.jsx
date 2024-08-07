@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import pruebaApi from "../api/pruebaApi";
 import { AuthContext } from "../context/AuthContext";
 import "../assets/Login.css";
+import { jwtDecode } from "jwt-decode";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -18,7 +19,7 @@ const Login = () => {
         email,
         contraseña,
       });
-      if (resp.status === 200) {
+      
         Swal.fire({
           title: "Inicio de sesión exitoso",
           text: "Has iniciado sesión correctamente.",
@@ -26,8 +27,26 @@ const Login = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        console.log(resp)
+      login();
+      console.log(resp)
+      //localStorage.setItem("token", resp.data.token);
+      // navigate("/Usuario");
+
+
+      const token = resp.data.token;
+      const decodedToken = jwtDecode(token); // Decodifica el token
+      localStorage.setItem("token", decodedToken);
+      const userRole = decodedToken.rol; // Asegúrate de que el token contiene la propiedad 'role'
+
+      // Redirige según el rol del usuario
+    
+      if (userRole === "Admin") {
+        navigate("/admin");
+      } else {
+        navigate("/usuario"); 
       }
+
+      
     } catch (error) {
       if (error.response && error.response.status === 400) {
         Swal.fire({

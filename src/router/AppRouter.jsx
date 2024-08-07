@@ -6,22 +6,19 @@ import Registro from "../pages/Registro.jsx";
 import Home from "../pages/Home.jsx";
 import Navbar from "../pages/Navbar.jsx"
 import Error404 from "../pages/Error404.jsx";
-//import { useAuth,AuthProvider } from '../context/AuthContext.jsx';
-import UserHome from "../pages/UserHome.jsx";
-import AdminHome from "../pages/AdminHome.jsx";
 
 
+import { Admin } from "../pages/Admin.jsx";
+import {Usuario} from "../pages/Usuario.jsx"
 
 const AppRouter = () => {
-
-  //const { user } = useAuth();
 
   return (
     <Router>
       <Navbar/>
       <Routes>
       <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
+      <Route path="/login" element={<Login />} />
         {/*
         
         <Route
@@ -38,10 +35,11 @@ const AppRouter = () => {
         />
         */}
 
-        <Route path="/admin-home" element={<AdminHome/>} />
-        <Route path="/user-home" element={<UserHome/>} />
         <Route path="/registro" element={<Registro />} /> 
         <Route path="*" element={<Error404 />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/usuario" element={<Usuario />}/>
+      
       </Routes>
     </Router>
   );
