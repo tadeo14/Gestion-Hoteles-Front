@@ -1,0 +1,30 @@
+.Registro-background {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background: url('../images/istockphoto-1418784247-612x612.jpg') no-repeat center center fixed;
+  background-size: cover; 
+}
+
+.form-container {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: rgba(249, 249, 249, 0.9); /* Fondo blanco semi-transparente para el formulario */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: auto;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.text-center {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}

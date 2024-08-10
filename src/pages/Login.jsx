@@ -14,31 +14,34 @@ const Login = () => {
 
   const loginBackend = async (email, contraseña) => {
     try {
-      const resp = await pruebaApi.post("/auth/login", {
-        email,
-        contraseña,
+      const resp = await pruebaApi.post("/auth/login", { email, contraseña });
+
+      const { token, rol } = resp.data;
+
+      Swal.fire({
+        title: "Inicio de sesión exitoso",
+        text: "Has iniciado sesión correctamente.",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500,
       });
-      
-        Swal.fire({
-          title: "Inicio de sesión exitoso",
-          text: "Has iniciado sesión correctamente.",
-          icon: "success",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      login();
-      localStorage.setItem("token", resp.data.token);
-      navigate("/Usuario");
-      
+
+      login(token, rol);
+
+      if (rol === "Admin") {
+        navigate("/Admin");
+      } else {
+        navigate("/Usuario");
+      }
     } catch (error) {
       if (error.response && error.response.status === 400) {
         Swal.fire({
           title: "Error",
-          text:
-            error.response.data.mensaje || "Correo o contraseña incorrectos.",
+          text: error.response.data.mensaje || "Correo o contraseña incorrectos.",
           icon: "error",
           confirmButtonText: "Aceptar",
         });
+        
       } else {
         Swal.fire({
           title: "Error",
@@ -50,18 +53,10 @@ const Login = () => {
     }
   };
 
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
-  };
+  const handleEmail = (e) => setEmail(e.target.value);
+  const handleContraseña = (e) => setContraseña(e.target.value);
 
-  const handleContraseña = (e) => {
-    setContraseña(e.target.value);
-  };
-
-  const validarEmail = (email) => {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(String(email).toLowerCase());
-  };
+  const validarEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email).toLowerCase());
 
   const manejarEnvio = (e) => {
     e.preventDefault();
@@ -84,9 +79,7 @@ const Login = () => {
     }
   };
 
-  const handleRegistro = () => {
-    navigate("/registro");
-  };
+  const handleRegistro = () => navigate("/registro");
 
   return (
     <div className="login-background">
@@ -117,7 +110,7 @@ const Login = () => {
                 </Form.Group>
 
                 <Button variant="primary" type="submit" className="w-100 mt-3">
-                  Iniciar sesion
+                  Iniciar sesión
                 </Button>
                 <Button
                   variant="secondary"
