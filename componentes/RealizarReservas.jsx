@@ -3,7 +3,6 @@ import { Form, Button, Alert } from 'react-bootstrap';
 import pruebaApi from '../src/api/pruebaApi';
 
 const FormularioReserva = () => {
-  const [usuarioId, setUsuarioId] = useState('');
   const [habitacionId, setHabitacionId] = useState('');
   const [fechaInicio, setFechaInicio] = useState('');
   const [fechaFin, setFechaFin] = useState('');
@@ -14,6 +13,10 @@ const FormularioReserva = () => {
     e.preventDefault();
 
     try {
+      const usuarioId = localStorage.getItem('usuarioId');
+
+      console.log(usuarioId);
+      
       const response = await pruebaApi.post('/room/reservas', {
         usuarioId,
         habitacionId,
@@ -26,7 +29,7 @@ const FormularioReserva = () => {
       setError(null);
     } catch (error) {
         setError(error.response.data.message || 'Error al realizar la reserva');
-        console.log(error)
+      console.log(error)
       setMensaje(null);
     }
   };
@@ -37,15 +40,6 @@ const FormularioReserva = () => {
       {mensaje && <Alert variant="success">{mensaje}</Alert>}
       {error && <Alert variant="danger">{error}</Alert>}
       <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="usuarioId">
-          <Form.Label>ID de Usuario</Form.Label>
-          <Form.Control
-            type="text"
-            value={usuarioId}
-            onChange={(e) => setUsuarioId(e.target.value)}
-            required
-          />
-        </Form.Group>
         <Form.Group controlId="habitacionId">
           <Form.Label>ID de Habitación</Form.Label>
           <Form.Control
