@@ -12,24 +12,26 @@ const FormularioReserva = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const usuarioId = localStorage.getItem('usuarioId');
+    // Obtener el usuarioId del localStorage
+    const usuarioId = localStorage.getItem('usuarioId');
 
-      console.log(usuarioId);
-      
+    if (!usuarioId) {
+      setError('No se encontró el ID de usuario.');
+      return;
+    }
+
+    try {
       const response = await pruebaApi.post('/room/reservas', {
         usuarioId,
         habitacionId,
         fechaInicio,
         fechaFin,
       });
-      console.log("Habitación ID:", habitacionId);
 
       setMensaje(response.data.message);
       setError(null);
     } catch (error) {
-        setError(error.response.data.message || 'Error al realizar la reserva');
-      console.log(error)
+      setError(error.response.data.message || 'Error al realizar la reserva');
       setMensaje(null);
     }
   };
