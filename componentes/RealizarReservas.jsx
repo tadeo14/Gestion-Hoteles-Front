@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
+import { jwtDecode } from "jwt-decode";
+
 import pruebaApi from '../src/api/pruebaApi';
 
 const FormularioReserva = () => {
@@ -12,11 +14,28 @@ const FormularioReserva = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Obtener el usuarioId del localStorage
-    const usuarioId = localStorage.getItem('usuarioId');
+    // Obtener el token del localStorage
+    const token = localStorage.getItem('token');
+
+    // Decodificar el token y obtener el usuarioId
+    let usuarioId;
+    try {
+      const decodedToken = jwtDecode(token);
+      usuarioId = decodedToken.userId; // Asegúrate de que la clave sea la correcta
+    } catch (error) {
+      console.error('Error al decodificar el token', error);
+      setError('No se pudo decodificar el token.');
+      return;
+    }
 
     if (!usuarioId) {
       setError('No se encontró el ID de usuario.');
+      return;
+    }
+
+    // Validar las fechas
+    if (new Date(fechaFin) <= new Date(fechaInicio)) {
+      setError('La fecha de fin debe ser posterior a la fecha de inicio.');
       return;
     }
 
@@ -31,7 +50,7 @@ const FormularioReserva = () => {
       setMensaje(response.data.message);
       setError(null);
     } catch (error) {
-      setError(error.response.data.message || 'Error al realizar la reserva');
+      setError(error.response?.data?.message || 'Error al realizar la reserva');
       setMensaje(null);
     }
   };
