@@ -5,7 +5,6 @@ import Swal from "sweetalert2";
 import pruebaApi from "../api/pruebaApi";
 import { AuthContext } from "../context/AuthContext";
 import "../assets/Login.css";
-import { jwtDecode } from "jwt-decode";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -13,49 +12,36 @@ const Login = () => {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const loginBackend = async (email,contraseña) => {
+  const loginBackend = async (email, contraseña) => {
     try {
-      const resp = await pruebaApi.post("/auth/login", {
-        email,
-        contraseña,
+      const resp = await pruebaApi.post("/auth/login", { email, contraseña });
+
+      const { token, rol } = resp.data;
+
+      Swal.fire({
+        title: "Inicio de sesión exitoso",
+        text: "Has iniciado sesión correctamente.",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500,
       });
-      
-        Swal.fire({
-          title: "Inicio de sesión exitoso",
-          text: "Has iniciado sesión correctamente.",
-          icon: "success",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      login();
-      console.log(resp)
-      //localStorage.setItem("token", resp.data.token);
-      // navigate("/Usuario");
 
+      login(token, rol);
 
-      const token = resp.data.token;
-      const decodedToken = jwtDecode(token); // Decodifica el token
-      localStorage.setItem("token", decodedToken);
-      const userRole = decodedToken.rol; // Asegúrate de que el token contiene la propiedad 'role'
-
-      // Redirige según el rol del usuario
-    
-      if (userRole === "Admin") {
-        navigate("/admin");
+      if (rol === "Admin") {
+        navigate("/Admin");
       } else {
-        navigate("/usuario"); 
+        navigate("/Usuario");
       }
-
-      
     } catch (error) {
       if (error.response && error.response.status === 400) {
         Swal.fire({
           title: "Error",
-          text:
-            error.response.data.mensaje || "Correo o contraseña incorrectos.",
+          text: error.response.data.mensaje || "Correo o contraseña incorrectos.",
           icon: "error",
           confirmButtonText: "Aceptar",
         });
+        
       } else {
         Swal.fire({
           title: "Error",
@@ -67,18 +53,10 @@ const Login = () => {
     }
   };
 
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
-  };
+  const handleEmail = (e) => setEmail(e.target.value);
+  const handleContraseña = (e) => setContraseña(e.target.value);
 
-  const handleContraseña = (e) => {
-    setContraseña(e.target.value);
-  };
-
-  const validarEmail = (email) => {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(String(email).toLowerCase());
-  };
+  const validarEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email).toLowerCase());
 
   const manejarEnvio = (e) => {
     e.preventDefault();
@@ -101,9 +79,7 @@ const Login = () => {
     }
   };
 
-  const handleRegistro = () => {
-    navigate("/registro");
-  };
+  const handleRegistro = () => navigate("/registro");
 
   return (
     <div className="login-background">
@@ -134,7 +110,7 @@ const Login = () => {
                 </Form.Group>
 
                 <Button variant="primary" type="submit" className="w-100 mt-3">
-                  Iniciar sesion
+                  Iniciar sesión
                 </Button>
                 <Button
                   variant="secondary"

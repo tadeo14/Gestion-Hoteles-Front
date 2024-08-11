@@ -1,0 +1,38 @@
+.contacto-background {
+  text-align: center;
+  background-image: url(../images/galeria5.jpg);
+  background-size: cover;
+  padding: 20px;
+  color: rgb(231, 235, 14);
+}
+
+.info-contacto {
+  margin-bottom: 20px;
+}
+
+.form-container {
+  background-color: rgba(249, 249, 249, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mapa {
+  border-radius: 20px;
+}
+
+@media (max-width: 768px) {
+  .mapa {
+    height: 300px;
+  }
+}
+
+@media (max-width: 576px) {
+  .form-container {
+    padding: 10px;
+  }
+
+  .mapa {
+    height: 250px;
+  }
+}
