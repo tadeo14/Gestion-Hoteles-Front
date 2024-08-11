@@ -21,7 +21,7 @@ const FormularioReserva = () => {
     let usuarioId;
     try {
       const decodedToken = jwtDecode(token);
-      usuarioId = decodedToken.userId; // Asegúrate de que la clave sea la correcta
+      usuarioId = decodedToken.id; // Accdemos al id del usuario en el token
     } catch (error) {
       console.error('Error al decodificar el token', error);
       setError('No se pudo decodificar el token.');
@@ -29,6 +29,7 @@ const FormularioReserva = () => {
     }
 
     if (!usuarioId) {
+      console.log(usuarioId);
       setError('No se encontró el ID de usuario.');
       return;
     }
