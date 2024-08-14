@@ -1,0 +1,16 @@
+[build]
+  # Directorio donde se encuentra tu sitio o aplicación estática
+  publish = "dist"
+  # Comando que se ejecuta para construir tu sitio o aplicación
+  command = "npm run build"
+
+  # Limitando el número de procesos paralelos
+  # Esto puede ayudar a reducir el uso de memoria
+  environment = { 
+    NODE_OPTIONS = "--max_old_space_size=2048"
+  }
+
+  # Establece una mayor cantidad de tiempo antes de que Netlify cierre la construcción por tiempo excedido
+  timeout = 2400
+
+  
