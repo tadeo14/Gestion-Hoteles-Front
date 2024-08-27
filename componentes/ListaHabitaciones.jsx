@@ -224,7 +224,7 @@ export const ListaHabitaciones = () => {
       <div className="d-flex flex-wrap justify-content-center">
         {habitaciones.map((habitacion) => (
           <Card key={habitacion._id} className="m-2" style={{ width: '18rem', flex: '1 1 calc(100% - 2rem)', maxWidth: '300px' }}>
-            <Card.Img variant="top" src={`/public/images/${habitacion.imagen}`} alt={`Habitación ${habitacion.numero}`} style={{ height: '200px', objectFit: 'cover' }} />
+            <Card.Img variant="top" src={`https://rollinghotel1.netlify.app/public/images/${habitacion.imagen}`} alt={`Habitación ${habitacion.numero}`} style={{ height: '200px', objectFit: 'cover' }} />
 
             <Card.Body>
               <Card.Title>Habitación {habitacion.numero}</Card.Title>
