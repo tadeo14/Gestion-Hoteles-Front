@@ -31,7 +31,7 @@ export const ListaHabitacionesUsuario = () => {
                         <Row key={habitacion._id} className="mb-3">
                             <Col>
                                 <Card className="flex-row">
-                                    <Card.Img className="img-fluid" style={{ width: '200px', height: 'auto' }} src={`/public/images/${habitacion.imagen}`} alt={`Habitación ${habitacion.numero}`} />
+                                    <Card.Img className="img-fluid" style={{ width: '200px', height: 'auto' }} src={`/images/${habitacion.imagen}`} alt={`Habitación ${habitacion.numero}`} />
                                     <Card.Body>
                                         <Card.Title>Habitación {habitacion.numero}</Card.Title>
                                         <Card.Text>
