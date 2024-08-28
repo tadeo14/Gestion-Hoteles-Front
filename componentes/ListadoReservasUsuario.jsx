@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
 import pruebaApi from '../src/api/pruebaApi';
-import jwtDecode from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
 import Swal from 'sweetalert2';
 
 export const ListadoReservasUsuario = () => {
