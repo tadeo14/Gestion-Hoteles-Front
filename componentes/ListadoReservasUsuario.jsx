@@ -30,12 +30,14 @@ export const ListadoReservasUsuario = () => {
         }
 
         try {
-            const resp = await pruebaApi.get(`/room/listadoReservas/${usuarioId}`);
-            setReservas(resp.data.listadoReservas);
-        } catch (error) {
-            console.log(error);
-            setError('Error al obtener las reservas');
-        }
+          console.log(`Llamando a la API con usuarioId: ${usuarioId}`);
+          const resp = await pruebaApi.get(`/room/listadoReservas/${usuarioId}`);
+          console.log("Respuesta de la API:", resp.data);
+          setReservas(resp.data.listadoReservas);
+      } catch (error) {
+          console.error('Error al obtener las reservas:', error);
+          setError('Error al obtener las reservas');
+      }
     };
 
     useEffect(() => {
