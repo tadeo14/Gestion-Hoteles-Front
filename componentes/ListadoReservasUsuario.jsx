@@ -1,81 +1,106 @@
 import React, { useEffect } from 'react';
-import Table from 'react-bootstrap/Table'; // Asegúrate de importar Table desde react-bootstrap
+import Table from 'react-bootstrap/Table';
 import pruebaApi from '../src/api/pruebaApi';
+import { jwtDecode } from "jwt-decode";
+import Swal from 'sweetalert2';
 
-export const ListadoReservasUsuario = ({usuario}) => {
+export const ListadoReservasUsuario = () => {
     const [reservas, setReservas] = React.useState([]);
+    const [error, setError] = React.useState(null);
 
     const getReservas = async () => {
+        // Obtener el token del localStorage
+        const token = localStorage.getItem('token');
+
+        // Decodificar el token y obtener el usuarioId
+        let usuarioId;
         try {
-           
-            const resp = await pruebaApi.get(`room/listadoReservas/${usuario}`);
-            setReservas(resp.data.listadoReservas);
+            const decodedToken = jwtDecode(token);
+            usuarioId = decodedToken.id;
         } catch (error) {
-            console.log(error);
+            console.error('Error al decodificar el token', error);
+            setError('No se pudo decodificar el token.');
+            return;
         }
-    }
+
+        if (!usuarioId) {
+            console.log(usuarioId);
+            setError('No se encontró el ID de usuario.');
+            return;
+        }
+
+        try {
+          console.log(`Llamando a la API con usuarioId: ${usuarioId}`);
+          const resp = await pruebaApi.get(`/room/listadoReservas/${usuarioId}`);
+          console.log("Respuesta de la API:", resp.data);
+          setReservas(resp.data.listadoReservas);
+      } catch (error) {
+          console.error('Error al obtener las reservas:', error);
+          setError('Error al obtener las reservas');
+      }
+    };
 
     useEffect(() => {
-        if (usuario) {
-            getReservas();
+        getReservas();
+    }, []);
+
+    const cancelarReserva = async (id) => {
+        try {
+            const resp = await pruebaApi.delete(`/room/reservas/${id}`);
+            console.log(resp);
+            Swal.fire({
+                title: "Reserva eliminada",
+                icon: "success",
+                showConfirmButton: false,
+                timer: 1500,
+            });
+            getReservas(); // Actualizar la lista de reservas después de la eliminación
+        } catch (error) {
+            console.log(error);
+            Swal.fire({
+                title: "Error",
+                text: "Ocurrió un problema al eliminar la reserva.",
+                icon: "error",
+                confirmButtonText: "Aceptar",
+            });
         }
-        
-    }, [usuario]);
+    };
 
-
-
-
-
-
-  return (
-    <>
-      <h1>Listado de Reservas</h1>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Usuario</th>
-            <th>Fecha Inicio</th>
-            <th>Fecha Fin</th>
-            
-          </tr>
-        </thead>
+    return (
+        <>
+            <h1>Listado de Reservas</h1>
+            {error && <p>{error}</p>}
+            <Table striped bordered hover>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Usuario</th>
+                        <th>Fecha Inicio</th>
+                        <th>Fecha Fin</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
                 <tbody>
-                  {reservas.map((reservas) => {
-                      return (
-                        <tr > 
-                              <td>{reservas._id}</td>
-                              <td>{reservas.usuario}</td>
-                              <td>{reservas.fechaInicio}</td>
-                              <td>{reservas.fechaFin}</td>
-                          </tr>
-                      )
-                  })}
+                    {reservas.map((reserva) => (
+                        <tr key={reserva._id}>
+                            <td>{reserva._id}</td>
+                            <td>{reserva.usuario}</td>
+                            <td>{reserva.fechaInicio}</td>
+                            <td>{reserva.fechaFin}</td>
+                            <td>
+                                <button
+                                    onClick={() => cancelarReserva(reserva._id)}
+                                    className="btn btn-danger"
+                                >
+                                    Cancelar
+                                </button>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
-      </Table>
-    </>
-  );
+            </Table>
+        </>
+    );
 };
 
-const cancelarReserva = async (id) => {
-  try {
-    const resp = await pruebaApi.delete(`/room/reservas/${id}`);
-    console.log(resp);
-    Swal.fire({
-      title: "Habitación eliminada",
-      icon: "success",
-      showConfirmButton: false,
-      timer: 1500,
-    });
-    getHabitaciones(); // Actualizar la lista de habitaciones después de la eliminación
-  } catch (error) {
-    console.log(error);
-    Swal.fire({
-      title: "Error",
-      text: "Ocurrió un problema al eliminar la habitación.",
-      icon: "error",
-      confirmButtonText: "Aceptar",
-    });
-  }
-}
 export default ListadoReservasUsuario;
