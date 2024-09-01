@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Form, Button, Alert, Row, Col, Card } from 'react-bootstrap';
-import jwtDecode from 'jwt-decode';
+import React, { useState } from 'react';
+import { Form, Button, Alert } from 'react-bootstrap';
+import { jwtDecode } from "jwt-decode";
+
 import pruebaApi from '../src/api/pruebaApi';
 
 const FormularioReserva = () => {
