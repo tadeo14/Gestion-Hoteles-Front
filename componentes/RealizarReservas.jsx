@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
-import jwtDecode from "jwt-decode"; // Asegúrate de que jwtDecode se importe correctamente sin llaves
+import { jwtDecode } from "jwt-decode";
+
 import pruebaApi from '../src/api/pruebaApi';
 
 const FormularioReserva = () => {
@@ -20,7 +21,7 @@ const FormularioReserva = () => {
     let usuarioId;
     try {
       const decodedToken = jwtDecode(token);
-      usuarioId = decodedToken.id; // Accedemos al id del usuario en el token
+      usuarioId = decodedToken.id; // Accdemos al id del usuario en el token
     } catch (error) {
       console.error('Error al decodificar el token', error);
       setError('No se pudo decodificar el token.');
@@ -28,6 +29,7 @@ const FormularioReserva = () => {
     }
 
     if (!usuarioId) {
+      console.log(usuarioId);
       setError('No se encontró el ID de usuario.');
       return;
     }
