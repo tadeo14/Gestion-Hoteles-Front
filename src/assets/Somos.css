@@ -69,3 +69,26 @@ body {
     width: 100%;
   }
 }
+
+/* Estilo para los enlaces sociales */
+.social-links {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Espacio entre los íconos */
+}
+
+.social-links a {
+  color: #333; /* Color de los íconos por defecto (puedes cambiarlo según tu preferencia) */
+  font-size: 1.5rem; /* Tamaño de los íconos */
+  text-decoration: none; /* Elimina el subrayado de los enlaces */
+}
+
+.social-links a:hover,
+.social-links a:focus {
+  color: #333; /* Mantén el mismo color al pasar el ratón o al enfocarse */
+}
+
+.social-links i {
+  transition: color 0.3s; /* Transición de color suave */
+}

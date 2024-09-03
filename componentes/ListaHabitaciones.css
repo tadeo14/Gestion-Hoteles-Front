@@ -1,0 +1,87 @@
+/* Estilos para el botón "Nueva habitación" */
+.btn-nueva-habitacion {
+  border-radius: 25px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.btn-nueva-habitacion:hover {
+  background-color: #0056b3; /* Ajusta el color según el tema */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para las cartas de habitaciones */
+.card-habitacion {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+  overflow: hidden;
+}
+
+.card-habitacion:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo para la imagen de la carta */
+.card-img {
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Estilo para el texto dentro de la carta */
+.card-body {
+  padding: 15px;
+  text-align: center;
+}
+
+.card-body .card-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.card-body .card-text {
+  font-size: 14px;
+  color: #555;
+}
+
+/* Espaciado y alineación en la vista de tarjetas */
+.d-flex {
+  margin: 0 auto;
+}
+
+.d-flex .card {
+  margin: 10px;
+}
+
+/* Estilos para los botones en la carta */
+.card-body .btn {
+  border-radius: 20px;
+  padding: 8px 15px;
+  font-size: 14px;
+}
+
+.btn-info {
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
+
+.btn-info:hover {
+  background-color: #138496;
+  border-color: #117a8b;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+}
