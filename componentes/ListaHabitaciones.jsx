@@ -141,19 +141,23 @@ export const ListaHabitaciones = () => {
               <Form.Label>Número de Habitación</Form.Label>
               <Form.Control
                 type="number"
-                placeholder="105"
+                placeholder="Ej. 150"
                 value={numero}
                 onChange={(e) => setNumero(e.target.value)}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="tipo">
               <Form.Label>Tipo</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Familiar"
-                value={tipo}
-                onChange={(e) => setTipo(e.target.value)}
-              />
+              <Form.Select
+              value={tipo}
+              onChange={(e) => setTipo(e.target.value)}
+              >
+              <option value="">Selecciona un tipo</option>
+              <option value="Simple">Simple</option>
+              <option value="Doble">Doble</option>
+              <option value="Familiar">Familiar</option>
+              <option value="Suite">Suite</option>
+      </Form.Select>
             </Form.Group>
             <Form.Group className="mb-3" controlId="precio">
               <Form.Label>Precio</Form.Label>
