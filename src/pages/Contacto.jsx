@@ -34,6 +34,12 @@ export const Contacto = () => {
         title: "Enviado",
         showConfirmButton: false,
         timer: 1500
+      }).then(() => {
+        // Limpiar el formulario después de mostrar el mensaje de éxito
+        setNombre('');
+        setEmail('');
+        setTelefono('');
+        setMensaje('');
       });
     }
   }
@@ -42,30 +48,30 @@ export const Contacto = () => {
     <div className='contacto-background'>
       <Container className="d-flex justify-content-center align-items-center min-vh-100">
         <Row className='w-100'>
+              <h1 className='contacto'>Contacto</h1>
           <Col md={6} className="mb-4">
             <div className="info-contacto">
-              <h1>Contacto</h1>
             </div>
             <div className='form-container'>
               <Form onSubmit={handleContacto}>
                 <Form.Group className="mb-3" controlId="formBasicNombre">
                   <Form.Label>Nombre</Form.Label>
-                  <Form.Control type="text" placeholder="Ingrese su nombre" onChange={(e) => setNombre(e.target.value)} />
+                  <Form.Control type="text" placeholder="Ingrese su nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label>Correo electrónico</Form.Label>
-                  <Form.Control type="email" placeholder="@gmail.com" onChange={(e) => setEmail(e.target.value)} />
+                  <Form.Control type="email" placeholder="@gmail.com" value={email} onChange={(e) => setEmail(e.target.value)} />
                 </Form.Group>
 
                 <Form.Group className="mb-3">
                   <Form.Label>Teléfono</Form.Label>
-                  <Form.Control type="number" placeholder="Ingrese su número de teléfono" onChange={(e) => setTelefono(e.target.value)} />
+                  <Form.Control type="number" placeholder="Ingrese su número de teléfono" value={telefono} onChange={(e) => setTelefono(e.target.value)} />
                 </Form.Group>
 
                 <Form.Group className="mb-3">
                   <Form.Label>Mensaje</Form.Label>
-                  <Form.Control as="textarea" rows={3} placeholder="Ingrese su mensaje" onChange={(e) => setMensaje(e.target.value)} />
+                  <Form.Control as="textarea" rows={3} placeholder="Ingrese su mensaje" value={mensaje} onChange={(e) => setMensaje(e.target.value)} />
                 </Form.Group>
 
                 <Button variant="primary" type="submit" className="w-100 mt-3">
