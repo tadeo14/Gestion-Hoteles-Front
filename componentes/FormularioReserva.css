@@ -1,0 +1,70 @@
+/* Estilos para las cartas de habitaciones */
+.card-habitacion {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+}
+
+.card-habitacion:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo para la imagen de la carta */
+.card-img {
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Estilo para el texto dentro de la carta */
+.card-body {
+  padding: 15px;
+  text-align: left;
+}
+
+.card-body .card-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.card-body .card-text {
+  font-size: 14px;
+  color: #555;
+}
+
+/* Estilo para los botones dentro de la carta */
+.card-body .btn {
+  border-radius: 20px;
+  padding: 8px 15px;
+  font-size: 14px;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+/* Alineación de tarjetas en la vista */
+.d-flex {
+  margin: 0 auto;
+}
+
+.d-flex .card {
+  margin: 10px;
+}
+
+/* Ajustes adicionales para las imágenes dentro de las tarjetas */
+.img-fluid {
+  width: 200px;
+  height: 100%;
+}

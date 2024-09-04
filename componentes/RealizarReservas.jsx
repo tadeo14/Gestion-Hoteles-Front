@@ -3,6 +3,7 @@ import { Form, Button, Alert, Row, Col, Card } from 'react-bootstrap';
 import { jwtDecode } from "jwt-decode";
 
 import pruebaApi from '../src/api/pruebaApi';
+import './FormularioReserva.css'; // Asegúrate de importar el CSS actualizado
 
 const FormularioReserva = () => {
   const [fechaInicio, setFechaInicio] = useState('');
@@ -106,25 +107,21 @@ const FormularioReserva = () => {
         </Button>
       </Form>
 
-      <div className="mt-4">
+      <div className="mt-4 d-flex flex-wrap justify-content-center">
         {habitaciones.map((habitacion) => (
-          <Row key={habitacion._id} className="mb-3">
-            <Col>
-              <Card className="flex-row">
-                <Card.Img className="img-fluid" style={{ width: '200px', height: 'auto' }} src={`/images/${habitacion.imagen}`} alt={`Habitación ${habitacion.numero}`} />
-                <Card.Body>
-                  <Card.Title>Habitación {habitacion.numero}</Card.Title>
-                  <Card.Text>
-                    Tipo: {habitacion.tipo}<br />
-                    Precio: ${habitacion.precio}
-                  </Card.Text>
-                  <Button variant="success" onClick={() => handleReserva(habitacion._id)}>
-                    Reservar
-                  </Button>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
+          <Card key={habitacion._id} className="card-habitacion">
+            <Card.Img className="card-img" src={`/images/${habitacion.imagen}`} alt={`Habitación ${habitacion.numero}`} />
+            <Card.Body>
+              <Card.Title>Habitación {habitacion.numero}</Card.Title>
+              <Card.Text>
+                Tipo: {habitacion.tipo}<br />
+                Precio: ${habitacion.precio}
+              </Card.Text>
+              <Button variant="success" onClick={() => handleReserva(habitacion._id)}>
+                Reservar
+              </Button>
+            </Card.Body>
+          </Card>
         ))}
       </div>
     </div>

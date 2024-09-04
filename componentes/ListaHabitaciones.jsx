@@ -235,7 +235,7 @@ export const ListaHabitaciones = () => {
           >
             <Card.Img 
               variant="top" 
-              src={`https://rollinghotel1.netlify.app/public/images/${habitacion.imagen}`} 
+              src={`http://localhost:5173/public/images/${habitacion.imagen}`} 
               alt={`Habitación ${habitacion.numero}`} 
               className="card-img"
             />
