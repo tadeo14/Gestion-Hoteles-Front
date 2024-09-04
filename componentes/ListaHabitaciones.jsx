@@ -245,19 +245,20 @@ export const ListaHabitaciones = () => {
                 Tipo: {habitacion.tipo} <br />
                 Precio: {habitacion.precio}
               </Card.Text>
-              <Button 
-                variant="info" 
-                onClick={() => editarHabitacion(habitacion)} 
-                className='me-2'
-              >
-                Modificar
-              </Button>
-              <Button 
-                variant="danger" 
-                onClick={() => eliminarHabitacionClick(habitacion._id)}
-              >
-                Eliminar
-              </Button>
+              <div className="btn-container">
+                <Button 
+                  variant="info" 
+                  onClick={() => editarHabitacion(habitacion)} 
+                >
+                  Modificar
+                </Button>
+                <Button 
+                  variant="danger" 
+                  onClick={() => eliminarHabitacionClick(habitacion._id)}
+                >
+                  Eliminar
+                </Button>
+              </div>
             </Card.Body>
           </Card>
         ))}

@@ -20,6 +20,9 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s, box-shadow 0.3s;
   overflow: hidden;
+  flex: 1 1 300px; /* Ajusta el tamaño base de la tarjeta */
+  max-width: 100%;
+  margin: 10px; /* Espacio alrededor de la tarjeta */
 }
 
 .card-habitacion:hover {
@@ -50,13 +53,12 @@
   color: #555;
 }
 
-/* Espaciado y alineación en la vista de tarjetas */
-.d-flex {
-  margin: 0 auto;
-}
-
-.d-flex .card {
-  margin: 10px;
+/* Contenedor para los botones en la carta */
+.btn-container {
+  display: flex;
+  justify-content: center; /* Centra los botones horizontalmente */
+  gap: 10px; /* Espacio entre los botones */
+  flex-wrap: wrap; /* Permite que los botones se envuelvan si es necesario */
 }
 
 /* Estilos para los botones en la carta */
@@ -84,4 +86,32 @@
 .btn-danger:hover {
   background-color: #c82333;
   border-color: #bd2130;
+}
+
+/* Estilos para hacer las tarjetas responsive */
+@media (max-width: 576px) {
+  .card-img {
+    height: 150px; /* Reduce la altura de la imagen en pantallas pequeñas */
+  }
+
+  .card-body {
+    padding: 10px; /* Reduce el padding en pantallas pequeñas */
+  }
+
+  .card-body .card-title {
+    font-size: 16px; /* Ajusta el tamaño del título en pantallas pequeñas */
+  }
+
+  .card-body .card-text {
+    font-size: 12px; /* Ajusta el tamaño del texto en pantallas pequeñas */
+  }
+
+  .btn-container {
+    flex-direction: column; /* Muestra los botones en una columna en pantallas pequeñas */
+  }
+
+  .btn-container .btn {
+    width: 100%; /* Botones ocupan el ancho completo en pantallas pequeñas */
+    margin-bottom: 10px; /* Espacio entre botones en pantallas pequeñas */
+  }
 }
