@@ -1,29 +1,55 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table'; // Importa el componente Table
 import pruebaApi from '../src/api/pruebaApi';
-import { jwtDecode } from "jwt-decode";
+import { jwtDecode } from 'jwt-decode';
 import Swal from 'sweetalert2';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './ListadoReservasUsuario.css';
 
 export const ListadoReservasUsuario = () => {
-    const [reservas, setReservas] = React.useState([]);
-    const [error, setError] = React.useState(null);
+    const [reservas, setReservas] = useState([]);
+    const [error, setError] = useState(null);
+    const [usuario, setUsuario] = useState(null);
+
+    const getUsuario = () => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            try {
+                const decodedToken = jwtDecode(token);
+                setUsuario(decodedToken.id); // Suponiendo que el ID del usuario está en el token
+            } catch (error) {
+                console.error('Error al decodificar el token', error);
+                setError('Error al obtener el usuario.');
+            }
+        } else {
+            setError('No hay token de autenticación disponible.');
+        }
+    };
 
     const getReservas = async () => {
+        if (!usuario) {
+            setError('Usuario no disponible.');
+            return;
+        }
+
         try {
-           
             const resp = await pruebaApi.get(`room/listadoReservas/${usuario}`);
             setReservas(resp.data.listadoReservas);
         } catch (error) {
             console.error('Error al obtener las reservas:', error);
-            setError('Error al obtener las reservas');
+            setError('Error al obtener las reservas.');
         }
-    };;
+    };
 
     useEffect(() => {
-        getReservas();
+        getUsuario(); // Obtener el usuario al cargar el componente
     }, []);
+
+    useEffect(() => {
+        if (usuario) {
+            getReservas(); // Obtener reservas si el usuario está disponible
+        }
+    }, [usuario]);
 
     const cancelarReserva = async (id) => {
         try {
@@ -57,13 +83,13 @@ export const ListadoReservasUsuario = () => {
 
     return (
         <div className="container mt-4">
-            <h1 className="mb-4">Listado de Reservas</h1>
+            <h1 className="text-center my-4">Listado de Reservas</h1>
             {error && <p className="text-danger">{error}</p>}
             <div className="table-responsive">
                 {/* Vista de tabla para pantallas medianas y grandes */}
                 <div className="d-none d-md-block">
-                    <Table striped bordered hover>
-                        <thead>
+                    <Table striped bordered hover className="table-custom">
+                        <thead className="thead-dark">
                             <tr>
                                 <th>#</th>
                                 <th>Usuario</th>
@@ -77,8 +103,8 @@ export const ListadoReservasUsuario = () => {
                                 <tr key={reserva._id}>
                                     <td>{reserva._id}</td>
                                     <td>{reserva.usuario}</td>
-                                    <td>{reserva.fechaInicio}</td>
-                                    <td>{reserva.fechaFin}</td>
+                                    <td>{formatDate(reserva.fechaInicio)}</td>
+                                    <td>{formatDate(reserva.fechaFin)}</td>
                                     <td>
                                         <button
                                             onClick={() => cancelarReserva(reserva._id)}
@@ -99,8 +125,8 @@ export const ListadoReservasUsuario = () => {
                             <div className="card-body">
                                 <h5 className="card-title">Reserva #{reserva._id}</h5>
                                 <p className="card-text"><strong>Usuario:</strong> {reserva.usuario}</p>
-                                <p className="card-text"><strong>Fecha Inicio:</strong> {reserva.fechaInicio}</p>
-                                <p className="card-text"><strong>Fecha Fin:</strong> {reserva.fechaFin}</p>
+                                <p className="card-text"><strong>Fecha Inicio:</strong> {formatDate(reserva.fechaInicio)}</p>
+                                <p className="card-text"><strong>Fecha Fin:</strong> {formatDate(reserva.fechaFin)}</p>
                                 <button
                                     onClick={() => cancelarReserva(reserva._id)}
                                     className="btn btn-danger"
