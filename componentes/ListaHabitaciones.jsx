@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Button, Modal, Form, Card } from 'react-bootstrap';
+import {  Button, Modal, Form, Card } from 'react-bootstrap';
 import pruebaApi from '../src/api/pruebaApi';
 import Swal from 'sweetalert2';
 import './ListaHabitaciones.css'; // Importa el archivo de estilos
@@ -136,7 +136,7 @@ export const ListaHabitaciones = () => {
       >
         Nueva habitación
       </Button>
-
+      {/* crear habitacion */}
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Crear habitación</Modal.Title>
@@ -181,7 +181,7 @@ export const ListaHabitaciones = () => {
           </Form>
         </Modal.Body>
       </Modal>
-
+      {/* editar habitacion */}
       <Modal show={showEditar} onHide={() => setShowEditar(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Editar habitación</Modal.Title>
