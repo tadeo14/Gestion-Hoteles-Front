@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
-import pruebaApi from '../src/api/pruebaApi'; 
+import pruebaApi from '../src/api/pruebaApi';
 
 export const ListadoReservasAdmin = () => {
   const [reservas, setReservas] = React.useState([]);
@@ -12,11 +12,19 @@ export const ListadoReservasAdmin = () => {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
     getReservas();
   }, []);
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Meses de 0 a 11, así que sumamos 1
+    const day = String(date.getDate()).padStart(2, '0'); // Asegura que el día tenga dos dígitos
+    return `${year}-${month}-${day}`;
+  };
 
   return (
     <>
@@ -36,8 +44,8 @@ export const ListadoReservasAdmin = () => {
               <tr key={reserva._id}>
                 <td>{reserva._id}</td>
                 <td>{reserva.usuario}</td>
-                <td>{reserva.fechaInicio}</td>
-                <td>{reserva.fechaFin}</td>
+                <td>{formatDate(reserva.fechaInicio)}</td> {/* Usa formatDate para formatear la fecha */}
+                <td>{formatDate(reserva.fechaFin)}</td> {/* Usa formatDate para formatear la fecha */}
               </tr>
             ))}
           </tbody>
