@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Button, Modal, Form, Card } from 'react-bootstrap';
+import {  Button, Modal, Form, Card } from 'react-bootstrap';
 import pruebaApi from '../src/api/pruebaApi';
 import Swal from 'sweetalert2';
 import './ListaHabitaciones.css'; // Importa el archivo de estilos
@@ -136,7 +136,7 @@ export const ListaHabitaciones = () => {
       >
         Nueva habitación
       </Button>
-
+      {/* crear habitacion */}
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Crear habitación</Modal.Title>
@@ -147,19 +147,23 @@ export const ListaHabitaciones = () => {
               <Form.Label>Número de Habitación</Form.Label>
               <Form.Control
                 type="number"
-                placeholder="105"
+                placeholder="Ej. 150"
                 value={numero}
                 onChange={(e) => setNumero(e.target.value)}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="tipo">
               <Form.Label>Tipo</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Familiar"
-                value={tipo}
-                onChange={(e) => setTipo(e.target.value)}
-              />
+              <Form.Select
+              value={tipo}
+              onChange={(e) => setTipo(e.target.value)}
+              >
+              <option value="">Selecciona un tipo</option>
+              <option value="Simple">Simple</option>
+              <option value="Doble">Doble</option>
+              <option value="Familiar">Familiar</option>
+              <option value="Suite">Suite</option>
+      </Form.Select>
             </Form.Group>
             <Form.Group className="mb-3" controlId="precio">
               <Form.Label>Precio</Form.Label>
@@ -181,7 +185,7 @@ export const ListaHabitaciones = () => {
           </Form>
         </Modal.Body>
       </Modal>
-
+      {/* editar habitacion */}
       <Modal show={showEditar} onHide={() => setShowEditar(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Editar habitación</Modal.Title>

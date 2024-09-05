@@ -11,31 +11,15 @@ export const ListadoReservasUsuario = () => {
     const [error, setError] = React.useState(null);
 
     const getReservas = async () => {
-        const token = localStorage.getItem('token');
-        let usuarioId;
-
         try {
-            const decodedToken = jwtDecode(token);
-            usuarioId = decodedToken.id;
-        } catch (error) {
-            console.error('Error al decodificar el token', error);
-            setError('No se pudo decodificar el token.');
-            return;
-        }
-
-        if (!usuarioId) {
-            setError('No se encontró el ID de usuario.');
-            return;
-        }
-
-        try {
-            const resp = await pruebaApi.get(`/room/listadoReservas/${usuarioId}`);
+           
+            const resp = await pruebaApi.get(`room/listadoReservas/${usuario}`);
             setReservas(resp.data.listadoReservas);
         } catch (error) {
             console.error('Error al obtener las reservas:', error);
             setError('Error al obtener las reservas');
         }
-    };
+    };;
 
     useEffect(() => {
         getReservas();
@@ -43,7 +27,8 @@ export const ListadoReservasUsuario = () => {
 
     const cancelarReserva = async (id) => {
         try {
-            await pruebaApi.delete(`/room/reservas/${id}`);
+            const resp = await pruebaApi.delete(`/room/reservas/${id}`);
+            console.log(resp);
             Swal.fire({
                 title: "Reserva eliminada",
                 icon: "success",
@@ -52,6 +37,7 @@ export const ListadoReservasUsuario = () => {
             });
             getReservas(); // Actualizar la lista de reservas después de la eliminación
         } catch (error) {
+            console.log(error);
             Swal.fire({
                 title: "Error",
                 text: "Ocurrió un problema al eliminar la reserva.",
@@ -59,6 +45,14 @@ export const ListadoReservasUsuario = () => {
                 confirmButtonText: "Aceptar",
             });
         }
+    };
+
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Meses de 0 a 11, así que sumamos 1
+        const day = String(date.getDate()).padStart(2, '0'); // Asegura que el día tenga dos dígitos
+        return `${year}-${month}-${day}`;
     };
 
     return (

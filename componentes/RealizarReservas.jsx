@@ -84,52 +84,58 @@ const FormularioReserva = () => {
       <Form onSubmit={handleBuscar}>
         <Row className="mb-3">
           <Col xs={12} md={12} className="mb-2">
-            <Form.Group controlId="fechaInicio">
-              <Form.Label style={{ fontWeight: 'bold' }}>Fecha de Inicio</Form.Label>
-              <Form.Control
+           <Form.Group controlId="fechaInicio">
+           <Form.Label style={{ fontWeight: 'bold' }} style={{ fontWeight: 'bold' }}>Fecha de Inicio</Form.Label>
+           <Form.Control
                 type="date"
                 value={fechaInicio}
                 onChange={(e) => setFechaInicio(e.target.value)}
                 required
                 className="form-date"
-              />
+                style={{ width: '25%' }} 
+          /> 
             </Form.Group>
           </Col>
           <Col xs={12} md={12} className="mb-2">
             <Form.Group controlId="fechaFin">
-              <Form.Label style={{ fontWeight: 'bold' }}>Fecha de Fin</Form.Label>
-              <Form.Control
+            <Form.Label style={{ fontWeight: 'bold' }} style={{ fontWeight: 'bold', marginTop: '10px' }}>Fecha de Fin</Form.Label>
+            <Form.Control
                 type="date"
                 value={fechaFin}
                 onChange={(e) => setFechaFin(e.target.value)}
                 required
                 className="form-date"
-              />
+                style={{ width: '25%' }} 
+          />
             </Form.Group>
           </Col>
           <Col xs={12} className="mb-2">
-            <Button variant="primary" type="submit" className="btn-buscar">
+            <Button variant="primary" type="submit" className="btn-buscar" style={{ marginTop: '10px' }}>
               Buscar Habitaciones Disponibles
             </Button>
           </Col>
         </Row>
       </Form>
 
-      <div className="mt-4 d-flex flex-wrap justify-content-center">
+      <div className="mt-4">
         {habitaciones.map((habitacion) => (
-          <Card key={habitacion._id} className="card-habitacion">
-            <Card.Img className="card-img" src={`/images/${habitacion.imagen}`} alt={`Habitación ${habitacion.numero}`} />
-            <Card.Body>
-              <Card.Title>Habitación {habitacion.numero}</Card.Title>
-              <Card.Text>
-                Tipo: {habitacion.tipo}<br />
-                Precio: ${habitacion.precio}
-              </Card.Text>
-              <Button variant="success" onClick={() => handleReserva(habitacion._id)}>
-                Reservar
-              </Button>
-            </Card.Body>
-          </Card>
+          <Row key={habitacion._id} className="mb-3">
+            <Col>
+              <Card className="flex-row">
+                <Card.Img className="img-fluid" style={{ width: '200px', height: 'auto' }} src={`/images/${habitacion.imagen}`} alt={`Habitación ${habitacion.numero}`} />
+                <Card.Body>
+                  <Card.Title>Habitación {habitacion.numero}</Card.Title>
+                  <Card.Text>
+                    Tipo: {habitacion.tipo}<br />
+                    Precio: ${habitacion.precio}
+                  </Card.Text>
+                  <Button variant="success" onClick={() => handleReserva(habitacion._id)}>
+                    Reservar
+                  </Button>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
         ))}
       </div>
     </div>

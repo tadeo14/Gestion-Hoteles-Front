@@ -7,6 +7,8 @@ import Registro from "../pages/Registro.jsx";
 import Home from "../pages/Home.jsx";
 import Navbar from "../pages/Navbar.jsx"
 import Error404 from "../pages/Error404.jsx";
+
+
 import { Admin } from "../pages/Admin.jsx";
 import {Usuario} from "../pages/Usuario.jsx"
 import Contacto from "../pages/Contacto.jsx";
@@ -14,12 +16,29 @@ import Galeria from "../pages/Galeria.jsx"
 import Somos from "../pages/Somos.jsx";
 import { Footers } from "../pages/Footers.jsx";
 const AppRouter = () => {
+
   return (
     <Router>
       <Navbar/>
       <Routes>
       <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
+      <Route path="/login" element={<Login />} />
+        {/*
+        
+        <Route
+          path="/"
+          render={() => {
+            if (!user) {
+              return <Redirect to="/login" />;
+            }
+            if (user.rol === 'Admin') {
+              return <Redirect to="/admin-home" />;
+            }
+            return <Redirect to="/user-home" />;
+          }}
+        />
+        */}
+
         <Route path="/registro" element={<Registro />} /> 
         <Route path="/contacto" element={<Contacto />} />
         <Route path="/galeria" element={<Galeria />} />
@@ -35,3 +54,4 @@ const AppRouter = () => {
 };
 
 export default AppRouter;
+
