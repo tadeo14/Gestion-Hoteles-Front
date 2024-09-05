@@ -68,3 +68,34 @@
   width: 200px;
   height: 100%;
 }
+
+.form-date {
+  width: 100%; /* Ancho completo en pantallas pequeñas */
+  box-sizing: border-box; /* Asegura que el padding no afecte al ancho total */
+}
+
+/* Estilos para el botón de búsqueda */
+.btn-buscar {
+  width: 100%; /* Ancho completo en pantallas pequeñas */
+  max-width: 300px; /* Ancho máximo en pantallas grandes */
+  margin-top: 10px;
+}
+
+/* Ajustes específicos para pantallas pequeñas */
+@media (max-width: 768px) {
+  .form-group {
+    margin-bottom: 15px; /* Espaciado entre campos */
+  }
+}
+
+/* Ajustes para pantallas grandes */
+@media (min-width: 992px) {
+  .form-date {
+    width: 25%; /* Ancho completo en pantallas grandes */
+  }
+
+  .btn-buscar {
+    width: 25%; /* Ancho completo en pantallas grandes */
+    max-width: 300px; /* Ancho máximo del botón en pantallas grandes */
+  }
+}

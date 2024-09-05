@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Alert, Row, Col, Card } from 'react-bootstrap';
 import { jwtDecode } from "jwt-decode";
-
 import pruebaApi from '../src/api/pruebaApi';
 import './FormularioReserva.css'; // Asegúrate de importar el CSS actualizado
 
@@ -35,9 +34,8 @@ const FormularioReserva = () => {
       return;
     }
 
-    // Filtrar habitaciones disponibles según las fechas (esto puede ser más complejo dependiendo de la lógica de tu backend)
+    // Filtrar habitaciones disponibles según las fechas
     const habitacionesDisponibles = habitaciones.filter(habitacion => {
-      // Suponiendo que tienes alguna lógica para verificar disponibilidad, aquí se haría el filtrado
       // Aquí estamos simulando que todas las habitaciones están disponibles
       return true; 
     });
@@ -84,29 +82,39 @@ const FormularioReserva = () => {
       {mensaje && <Alert variant="success">{mensaje}</Alert>}
       {error && <Alert variant="danger">{error}</Alert>}
       <Form onSubmit={handleBuscar}>
-       <Form.Group controlId="fechaInicio">
-       <Form.Label style={{ fontWeight: 'bold' }}>Fecha de Inicio</Form.Label>
-       <Form.Control
-            type="date"
-            value={fechaInicio}
-            onChange={(e) => setFechaInicio(e.target.value)}
-            required
-            style={{ width: '25%' }} 
+        <Row className="mb-3">
+          <Col xs={12} md={12} className="mb-2">
+           <Form.Group controlId="fechaInicio">
+           <Form.Label style={{ fontWeight: 'bold' }}>Fecha de Inicio</Form.Label>
+           <Form.Control
+                type="date"
+                value={fechaInicio}
+                onChange={(e) => setFechaInicio(e.target.value)}
+                required
+                className="form-date"
+                style={{ width: '25%' }} 
           /> 
-        </Form.Group>
-        <Form.Group controlId="fechaFin">
-        <Form.Label style={{ fontWeight: 'bold', marginTop: '10px' }}>Fecha de Fin</Form.Label>
-        <Form.Control
-            type="date"
-            value={fechaFin}
-            onChange={(e) => setFechaFin(e.target.value)}
-            required
-            style={{ width: '25%' }} 
+            </Form.Group>
+          </Col>
+          <Col xs={12} md={12} className="mb-2">
+            <Form.Group controlId="fechaFin">
+            <Form.Label style={{ fontWeight: 'bold', marginTop: '10px' }}>Fecha de Fin</Form.Label>
+            <Form.Control
+                type="date"
+                value={fechaFin}
+                onChange={(e) => setFechaFin(e.target.value)}
+                required
+                className="form-date"
+                style={{ width: '25%' }} 
           />
-        </Form.Group>
-        <Button variant="primary" type="submit" style={{ marginTop: '10px' }}>
-          Buscar Habitaciones Disponibles
-        </Button>
+            </Form.Group>
+          </Col>
+          <Col xs={12} className="mb-2">
+            <Button variant="primary" type="submit" className="btn-buscar" style={{ marginTop: '10px' }}>
+              Buscar Habitaciones Disponibles
+            </Button>
+          </Col>
+        </Row>
       </Form>
 
       <div className="mt-4">
