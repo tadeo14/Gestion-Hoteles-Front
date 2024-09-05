@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Button, Modal, Form, Card } from 'react-bootstrap';
+import {  Button, Modal, Form, Card } from 'react-bootstrap';
 import pruebaApi from '../src/api/pruebaApi';
 import Swal from 'sweetalert2';
+import './ListaHabitaciones.css'; // Importa el archivo de estilos
 
 export const ListaHabitaciones = () => {
   const [habitaciones, setHabitaciones] = useState([]);
@@ -11,6 +12,7 @@ export const ListaHabitaciones = () => {
   const [precio, setPrecio] = useState('');
   const [showEditar, setShowEditar] = useState(false);
   const [habitacionesEditar, setHabitacionesEditar] = useState([]);
+  
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -126,11 +128,15 @@ export const ListaHabitaciones = () => {
 
   return (
     <>
-      <h1>Listado de Habitaciones</h1>
-      <Button variant="primary" onClick={handleShow}>
+      <h1 className="mb-4">Listado de Habitaciones</h1>
+      <Button 
+        variant="primary" 
+        onClick={handleShow} 
+        className="btn-nueva-habitacion"
+      >
         Nueva habitación
       </Button>
-
+      {/* crear habitacion */}
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Crear habitación</Modal.Title>
@@ -179,9 +185,9 @@ export const ListaHabitaciones = () => {
           </Form>
         </Modal.Body>
       </Modal>
-
-      <Modal show={showEditar}>
-        <Modal.Header>
+      {/* editar habitacion */}
+      <Modal show={showEditar} onHide={() => setShowEditar(false)}>
+        <Modal.Header closeButton>
           <Modal.Title>Editar habitación</Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -227,17 +233,36 @@ export const ListaHabitaciones = () => {
 
       <div className="d-flex flex-wrap justify-content-center">
         {habitaciones.map((habitacion) => (
-          <Card key={habitacion._id} className="m-2" style={{ width: '18rem', flex: '1 1 calc(100% - 2rem)', maxWidth: '300px' }}>
-            <Card.Img variant="top" src={`https://rollinghotel1.netlify.app/public/images/${habitacion.imagen}`} alt={`Habitación ${habitacion.numero}`} style={{ height: '200px', objectFit: 'cover' }} />
-
+          <Card 
+            key={habitacion._id} 
+            className="m-2 card-habitacion"
+          >
+            <Card.Img 
+              variant="top" 
+              src={`/images/${habitacion.imagen}`}
+              alt={`Habitación ${habitacion.numero}`} 
+              className="card-img"
+            />
             <Card.Body>
               <Card.Title>Habitación {habitacion.numero}</Card.Title>
               <Card.Text>
                 Tipo: {habitacion.tipo} <br />
                 Precio: {habitacion.precio}
               </Card.Text>
-              <Button variant="info" onClick={() => editarHabitacion(habitacion)} className='me-2'>Modificar</Button>
-              <Button variant="danger" onClick={() => eliminarHabitacionClick(habitacion._id)}>Eliminar</Button>
+              <div className="btn-container">
+                <Button 
+                  variant="info" 
+                  onClick={() => editarHabitacion(habitacion)} 
+                >
+                  Modificar
+                </Button>
+                <Button 
+                  variant="danger" 
+                  onClick={() => eliminarHabitacionClick(habitacion._id)}
+                >
+                  Eliminar
+                </Button>
+              </div>
             </Card.Body>
           </Card>
         ))}

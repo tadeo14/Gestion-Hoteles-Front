@@ -3,6 +3,7 @@ import { Form, Button, Alert, Row, Col, Card } from 'react-bootstrap';
 import { jwtDecode } from "jwt-decode";
 
 import pruebaApi from '../src/api/pruebaApi';
+import './FormularioReserva.css'; // Asegúrate de importar el CSS actualizado
 
 const FormularioReserva = () => {
   const [fechaInicio, setFechaInicio] = useState('');

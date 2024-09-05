@@ -80,7 +80,7 @@ const Navbar = () => {
             {isAuthenticated && userRole === "Admin" && (
               <li className="nav-item">
                 <Link className="nav-link" to="/admin">
-                  Administración
+                  ADMIN
                 </Link>
               </li>
             )}

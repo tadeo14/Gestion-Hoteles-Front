@@ -1,0 +1,42 @@
+/* Archivo ListadoReservasUsuario.css */
+
+/* Asegúrate de que el contenedor no se desborde y tenga buen espaciado */
+.container {
+  max-width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Permite que la tabla se desplace horizontalmente en pantallas pequeñas */
+.table-responsive {
+  overflow-x: auto;
+}
+
+/* Ajusta el margen del encabezado */
+h1 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  display: block;
+}
+
+/* Estilos para la vista de tarjetas */
+.card {
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+}
+
+.card-body {
+  padding: 1.25rem;
+}
+
+.card-title {
+  margin-bottom: 0.75rem;
+}
+
+.card-text {
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 767.98px) {
+  /* Ajusta el diseño si es necesario */
+}
