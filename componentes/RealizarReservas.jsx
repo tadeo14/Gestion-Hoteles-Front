@@ -85,7 +85,7 @@ const FormularioReserva = () => {
         <Row className="mb-3">
           <Col xs={12} md={12} className="mb-2">
            <Form.Group controlId="fechaInicio">
-           <Form.Label style={{ fontWeight: 'bold' }} style={{ fontWeight: 'bold' }}>Fecha de Inicio</Form.Label>
+           <Form.Label style={{ fontWeight: 'bold' }}>Fecha de Inicio</Form.Label>
            <Form.Control
                 type="date"
                 value={fechaInicio}
@@ -98,7 +98,7 @@ const FormularioReserva = () => {
           </Col>
           <Col xs={12} md={12} className="mb-2">
             <Form.Group controlId="fechaFin">
-            <Form.Label style={{ fontWeight: 'bold' }} style={{ fontWeight: 'bold', marginTop: '10px' }}>Fecha de Fin</Form.Label>
+            <Form.Label style={{ fontWeight: 'bold', marginTop: '10px' }}>Fecha de Fin</Form.Label>
             <Form.Control
                 type="date"
                 value={fechaFin}
