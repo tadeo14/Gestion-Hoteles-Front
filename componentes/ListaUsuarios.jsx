@@ -37,9 +37,21 @@ export const ListaUsuarios = () => {
   //funcion encargada de elimar usuario
   const eliminarUsuarioClick = async (id) => {
     try {
-      console.log(id)
+      const resp = await pruebaApi.delete(`/admin/eliminarUsuario/${id}`);
+      Swal.fire({
+        title: "Usuario eliminada",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      getUsuarios();
     } catch (error) {
-      
+      Swal.fire({
+        title: "Error",
+        text: "Ocurrió un problema al eliminar la habitación.",
+        icon: "error",
+        confirmButtonText: "Aceptar",
+      });
     }
   }
 //Funcion para editar producto
