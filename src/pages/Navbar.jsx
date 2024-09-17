@@ -10,7 +10,7 @@ const Navbar = () => {
 
   const handleReservationsClick = (e) => {
     if (!isAuthenticated) {
-      e.preventDefault(); // Previene la navegación
+      e.preventDefault(); 
       Swal.fire({
         title: "Acceso Denegado",
         text: "Debes iniciar sesión para acceder a las reservas.",
@@ -18,7 +18,7 @@ const Navbar = () => {
         confirmButtonText: "Iniciar Sesión",
       }).then((result) => {
         if (result.isConfirmed) {
-          navigate("/login"); // Redirige al usuario a la página de inicio de sesión
+          navigate("/login"); 
         }
       });
     }

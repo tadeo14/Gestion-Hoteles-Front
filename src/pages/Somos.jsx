@@ -6,7 +6,6 @@ import tadeo from "../images/fotoTadeo.jpg";
 import fabrizio from "../images/fotoFabrizio.jpg";
 
 const Somos = () => {
-  // Define los enlaces personalizados para cada miembro del equipo
   const links = {
     github: {
       tadeo: "https://github.com/tadeo14",  

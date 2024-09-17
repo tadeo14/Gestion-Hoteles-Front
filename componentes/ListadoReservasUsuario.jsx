@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Table from 'react-bootstrap/Table'; // Importa el componente Table
+import Table from 'react-bootstrap/Table'; 
 import pruebaApi from '../src/api/pruebaApi';
 import { jwtDecode } from 'jwt-decode';
 import Swal from 'sweetalert2';
@@ -16,7 +16,7 @@ export const ListadoReservasUsuario = () => {
         if (token) {
             try {
                 const decodedToken = jwtDecode(token);
-                setUsuario(decodedToken.id); // Suponiendo que el ID del usuario está en el token
+                setUsuario(decodedToken.id); 
             } catch (error) {
                 console.error('Error al decodificar el token', error);
                 setError('Error al obtener el usuario.');
@@ -42,26 +42,25 @@ export const ListadoReservasUsuario = () => {
     };
 
     useEffect(() => {
-        getUsuario(); // Obtener el usuario al cargar el componente
+        getUsuario(); 
     }, []);
 
     useEffect(() => {
         if (usuario) {
-            getReservas(); // Obtener reservas si el usuario está disponible
+            getReservas(); 
         }
     }, [usuario]);
 
     const cancelarReserva = async (id) => {
         try {
-            const resp = await pruebaApi.delete(`/room/reservas/${id}`);
-            console.log(resp);
+            await pruebaApi.delete(`/room/reservas/${id}`);
             Swal.fire({
                 title: "Reserva eliminada",
                 icon: "success",
                 showConfirmButton: false,
                 timer: 1500,
             });
-            getReservas(); // Actualizar la lista de reservas después de la eliminación
+            getReservas(); 
         } catch (error) {
             console.log(error);
             Swal.fire({
@@ -76,8 +75,8 @@ export const ListadoReservasUsuario = () => {
     const formatDate = (dateString) => {
         const date = new Date(dateString);
         const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0'); // Meses de 0 a 11, así que sumamos 1
-        const day = String(date.getDate()).padStart(2, '0'); // Asegura que el día tenga dos dígitos
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
         return `${year}-${month}-${day}`;
     };
 
@@ -86,7 +85,6 @@ export const ListadoReservasUsuario = () => {
             <h1 className="text-center my-4">Listado de Reservas</h1>
             {error && <p className="text-danger">{error}</p>}
             <div className="table-responsive">
-                {/* Vista de tabla para pantallas medianas y grandes */}
                 <div className="d-none d-md-block">
                     <Table striped bordered hover className="table-custom">
                         <thead className="thead-dark">
@@ -118,7 +116,6 @@ export const ListadoReservasUsuario = () => {
                         </tbody>
                     </Table>
                 </div>
-                {/* Vista de tarjetas para pantallas pequeñas */}
                 <div className="d-block d-md-none">
                     {reservas.map((reserva) => (
                         <div className="card mb-3" key={reserva._id}>

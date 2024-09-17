@@ -12,7 +12,6 @@ export const Contacto = () => {
   const handleContacto = (e) => {
     e.preventDefault();
 
-    // Validaciones
     if (nombre === '' || email === '' || telefono === '' || mensaje === '') {
       Swal.fire({
         title: "Error",
@@ -35,70 +34,109 @@ export const Contacto = () => {
         showConfirmButton: false,
         timer: 1500
       }).then(() => {
-        // Limpiar el formulario después de mostrar el mensaje de éxito
         setNombre('');
         setEmail('');
         setTelefono('');
         setMensaje('');
       });
     }
-  }
+  };
+
+  const handleNombreChange = (e) => {
+    const value = e.target.value;
+    const filteredValue = value.replace(/[^a-zA-Z\s]/g, '');
+    setNombre(filteredValue);
+  };
+
+  const handleTelefonoChange = (e) => {
+    const value = e.target.value;
+    const filteredValue = value.replace(/[^0-9]/g, '');
+    setTelefono(filteredValue);
+  };
 
   return (
     <div className='contacto-background'>
       <Container className="d-flex justify-content-center align-items-center min-vh-100">
         <Row className='w-100'>
-              <h1 className='contacto'>Contacto</h1>
+          <h1 className='contacto'>Contacto</h1>
           <Col md={6} className="mb-4">
-            <div className="info-contacto">
-            </div>
             <div className='form-container'>
               <Form onSubmit={handleContacto}>
                 <Form.Group className="mb-3" controlId="formBasicNombre">
                   <Form.Label>Nombre</Form.Label>
-                  <Form.Control type="text" placeholder="Ingrese su nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} />
+                  <Form.Control 
+                    type="text" 
+                    placeholder="Ingrese su nombre" 
+                    value={nombre} 
+                    onChange={handleNombreChange} 
+                  />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label>Correo electrónico</Form.Label>
-                  <Form.Control type="email" placeholder="@gmail.com" value={email} onChange={(e) => setEmail(e.target.value)} />
+                  <Form.Control 
+                    type="email" 
+                    placeholder="@gmail.com" 
+                    value={email} 
+                    onChange={(e) => setEmail(e.target.value)} 
+                  />
                 </Form.Group>
 
                 <Form.Group className="mb-3">
                   <Form.Label>Teléfono</Form.Label>
-                  <Form.Control type="number" placeholder="Ingrese su número de teléfono" value={telefono} onChange={(e) => setTelefono(e.target.value)} />
+                  <Form.Control 
+                    type="tel" 
+                    placeholder="Ingrese su número de teléfono" 
+                    value={telefono} 
+                    onChange={handleTelefonoChange} 
+                    maxLength={12} 
+                  />
                 </Form.Group>
 
                 <Form.Group className="mb-3">
                   <Form.Label>Mensaje</Form.Label>
-                  <Form.Control as="textarea" rows={3} placeholder="Ingrese su mensaje" value={mensaje} onChange={(e) => setMensaje(e.target.value)} />
+                  <Form.Control 
+                    as="textarea" 
+                    rows={3} 
+                    placeholder="Ingrese su mensaje" 
+                    value={mensaje} 
+                    onChange={(e) => setMensaje(e.target.value)} 
+                    maxLength={200} 
+                  />
                 </Form.Group>
 
                 <Button variant="primary" type="submit" className="w-100 mt-3">
-                <i class="bi bi-send-fill"></i>
-                  Enviar
+                  <i className="bi bi-send-fill"></i> Enviar
                 </Button>
               </Form>
             </div>
           </Col>
           <Col md={6}>
             <div className='mapaContenedor'>
-              <iframe className='mapa' src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3560.6054546075256!2d-65.20457872528097!3d-26.820688689363788!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94225c22a9466e13%3A0xfac3a336eeb51b0b!2s25%20de%20Mayo%20777%2C%20San%20Miguel%20de%20Tucum%C3%A1n%2C%20Tucum%C3%A1n!5e0!3m2!1ses!2sar!4v1722839286466!5m2!1ses!2sar" width="100%" height="400" allowFullScreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              <iframe 
+                className='mapa' 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3560.6054546075256!2d-65.20457872528097!3d-26.820688689363788!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94225c22a9466e13%3A0xfac3a336eeb51b0b!2s25%20de%20Mayo%20777%2C%20San%20Miguel%20de%20Tucum%C3%A1n%2C%20Tucum%C3%A1n!5e0!3m2!1ses!2sar!4v1722839286466!5m2!1ses!2sar" 
+                width="100%" 
+                height="400" 
+                allowFullScreen 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
             </div>
-              <p>
-                <i className="bi bi-geo-alt-fill"></i> 25 de Mayo 777, San Miguel de Tucumán - Tucumán - Argentina
-              </p>
-              <p>
-                <i className="bi bi-telephone-fill"></i> +54 3819973597
-              </p>
-              <p>
-                <i class="bi bi-buildings-fill"></i> Hotel Rolling
-              </p>
+            <p>
+              <i className="bi bi-geo-alt-fill"></i> 25 de Mayo 777, San Miguel de Tucumán - Tucumán - Argentina
+            </p>
+            <p>
+              <i className="bi bi-telephone-fill"></i> +54 3819973597
+            </p>
+            <p>
+              <i className="bi bi-buildings-fill"></i> Hotel Rolling
+            </p>
           </Col>
         </Row>
       </Container>
     </div>
-  )
-}
+  );
+};
 
 export default Contacto;
