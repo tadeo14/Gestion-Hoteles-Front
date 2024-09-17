@@ -6,20 +6,13 @@ import '../src/assets/ListaUsuarios.css';
 import Swal from 'sweetalert2';
 import { Modal, Form } from 'react-bootstrap';
 
-
 export const ListaUsuarios = () => {
-  const [usuarios, setUsuarios] = React.useState([]);
-  //creamos los estados para podes almacenar los valores que recolecta el input
-  // const[nombre, setNombre]  = 
-
-  //estado que sirve para mostrar y cerrar el modal
-  const [showEditar, setShowEditar] = useState(false)
-  //estado para almacenar los valores
+  const [usuarios, setUsuarios] = useState([]);
+  const [showEditar, setShowEditar] = useState(false);
   const [usuarioEditar, setUsuarioEditar] = useState({});
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
+  const handleClose = () => setShowEditar(false);
+  const handleShow = () => setShowEditar(true);
 
   const getUsuarios = async () => {
     try {
@@ -34,12 +27,11 @@ export const ListaUsuarios = () => {
     getUsuarios();
   }, []);
 
-  //funcion encargada de elimar usuario
   const eliminarUsuarioClick = async (id) => {
     try {
-      const resp = await pruebaApi.delete(`/admin/eliminarUsuario/${id}`);
+      await pruebaApi.delete(`/admin/eliminarUsuario/${id}`);
       Swal.fire({
-        title: "Usuario eliminada",
+        title: "Usuario eliminado",
         icon: "success",
         showConfirmButton: false,
         timer: 1500,
@@ -48,37 +40,28 @@ export const ListaUsuarios = () => {
     } catch (error) {
       Swal.fire({
         title: "Error",
-        text: "Ocurrió un problema al eliminar la habitación.",
+        text: "Ocurrió un problema al eliminar el usuario.",
         icon: "error",
         confirmButtonText: "Aceptar",
       });
     }
   }
-//Funcion para editar producto
 
   const editarUsuario = (usuario) => {
-    
     setUsuarioEditar(usuario);
     setShowEditar(true);
   };
 
-  //funcion para ir obteniendo los valores que va escribiendo en el input
   const handleChangeEditar = (propiedad, valor) => {
-    setShowEditar(true);
-    setUsuarioEditar(
-      {
-        ...usuarioEditar,
-        [propiedad]: valor,
-      }
-    );
-
+    setUsuarioEditar({
+      ...usuarioEditar,
+      [propiedad]: valor,
+    });
   };
 
-  //cuando el usuario apriete guardar se ejecutara la siguiente funcion
   const handleEditarUsuario = (e) => {
     e.preventDefault();
-    editarUsuarioBackend(usuarioEditar); // Llamamos a la función para editar el usuario en el backend
-    
+    editarUsuarioBackend(usuarioEditar);
   }
 
   const editarUsuarioBackend = async (usuario) => {
@@ -96,8 +79,8 @@ export const ListaUsuarios = () => {
         showConfirmButton: false,
         timer: 1500,
       });
-      getUsuarios(); // Recargamos la lista de usuarios
-      setShowEditar(false); // Cerramos el modal
+      getUsuarios();
+      setShowEditar(false);
     } catch (error) {
       Swal.fire({
         title: 'Error',
@@ -110,8 +93,6 @@ export const ListaUsuarios = () => {
 
   return (
     <>
-      
-      {/* Modal para editar usuarios */}
       <Modal show={showEditar} onHide={() => setShowEditar(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Editar Usuario</Modal.Title>
@@ -124,7 +105,6 @@ export const ListaUsuarios = () => {
                 type="text"
                 value={usuarioEditar.nombre}
                 onChange={(e) => handleChangeEditar('nombre', e.target.value)}
-                
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="tipo">
@@ -139,7 +119,7 @@ export const ListaUsuarios = () => {
               <Form.Label>Contraseña</Form.Label>
               <Form.Control
                 type="password"
-                placeholder="10000"
+                placeholder="Contraseña"
                 onChange={(e) => handleChangeEditar('contraseña', e.target.value)}
               />
             </Form.Group>
@@ -154,7 +134,6 @@ export const ListaUsuarios = () => {
           </Form>
         </Modal.Body>
       </Modal>
-
 
       <h1 className="text-center my-4">Listado de Usuarios</h1>
       <div className="table-responsive">
@@ -175,20 +154,18 @@ export const ListaUsuarios = () => {
                   <td>{usuario.nombre}</td>
                   <td>{usuario.email}</td>
                   <td>
-                  
-                <Button 
-                  variant="info" 
-                  onClick={() => editarUsuario(usuario)} 
-                >
-                  Modificar
-                </Button>
-                <Button 
-                  variant="danger" 
-                  onClick={() => eliminarUsuarioClick(usuario._id)}
-                >
-                  Eliminar
-                </Button>
-              
+                    <Button 
+                      variant="info" 
+                      onClick={() => editarUsuario(usuario)}
+                    >
+                      Modificar
+                    </Button>
+                    <Button 
+                      variant="danger" 
+                      onClick={() => eliminarUsuarioClick(usuario._id)}
+                    >
+                      Eliminar
+                    </Button>
                   </td>
                 </tr>
               )

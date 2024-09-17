@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Table from 'react-bootstrap/Table'; // Asegúrate de importar Table desde react-bootstrap
+import Table from 'react-bootstrap/Table';
 import pruebaApi from '../src/api/pruebaApi';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
@@ -12,7 +12,7 @@ export const ListaHabitacionesUsuario = () => {
         try {
             const resp = await pruebaApi.get('admin/habitaciones');
             setHabitaciones(resp.data.habitaciones);
-            //setHabitaciones(resp.data.);
+           
         } catch (error) {
             console.log(error);
         }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {  Button, Modal, Form, Card } from 'react-bootstrap';
 import pruebaApi from '../src/api/pruebaApi';
 import Swal from 'sweetalert2';
-import './ListaHabitaciones.css'; // Importa el archivo de estilos
+import './ListaHabitaciones.css'; 
 
 export const ListaHabitaciones = () => {
   const [habitaciones, setHabitaciones] = useState([]);

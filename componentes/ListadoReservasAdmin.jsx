@@ -21,8 +21,8 @@ export const ListadoReservasAdmin = () => {
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Meses de 0 a 11, así que sumamos 1
-    const day = String(date.getDate()).padStart(2, '0'); // Asegura que el día tenga dos dígitos
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
   };
 
@@ -44,8 +44,8 @@ export const ListadoReservasAdmin = () => {
               <tr key={reserva._id}>
                 <td>{reserva._id}</td>
                 <td>{reserva.usuario}</td>
-                <td>{formatDate(reserva.fechaInicio)}</td> {/* Usa formatDate para formatear la fecha */}
-                <td>{formatDate(reserva.fechaFin)}</td> {/* Usa formatDate para formatear la fecha */}
+                <td>{formatDate(reserva.fechaInicio)}</td>
+                <td>{formatDate(reserva.fechaFin)}</td>
               </tr>
             ))}
           </tbody>

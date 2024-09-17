@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Container, Form, Row } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom'; // Importa useNavigate
+import { useNavigate } from 'react-router-dom';
 import pruebaApi from '../api/pruebaApi';
 import Swal from 'sweetalert2';
 import "../assets/Registro.css";
@@ -10,7 +10,7 @@ export const Registro = () => {
   const [email, setEmail] = useState('');
   const [contraseña, setContraseña] = useState('');
   const [confirmarContraseña, setConfirmarContraseña] = useState('');
-  const navigate = useNavigate(); // Usa useNavigate
+  const navigate = useNavigate();
 
   const registroBackend = async (nombre, email, contraseña, confirmarContraseña) => {
     try {
@@ -29,8 +29,7 @@ export const Registro = () => {
         timer: 1500
       });
 
-      // Después de una inscripción exitosa, redirige al usuario
-      navigate('/'); // Redirige a Home.jsx o la ruta que corresponda
+      navigate('/'); 
     } catch (error) {
       if (error.response.status === 400) {
         Swal.fire({
@@ -51,7 +50,6 @@ export const Registro = () => {
   const handleRegistro = (e) => {
     e.preventDefault();
 
-    // Validaciones
     if (nombre === '' || email === '' || contraseña === '' || confirmarContraseña === '') {
       Swal.fire({
         title: "Error",
@@ -78,6 +76,12 @@ export const Registro = () => {
     }
   };
 
+  const handleNombreChange = (e) => {
+    const value = e.target.value;
+    const filteredValue = value.replace(/[^a-zA-Z\s]/g, '');
+    setNombre(filteredValue);
+  };
+
   return (
     <div className='Registro-background'>
       <Container className="d-flex justify-content-center align-items-center min-vh-100">
@@ -87,22 +91,41 @@ export const Registro = () => {
             <Form onSubmit={handleRegistro}>
               <Form.Group className="mb-3" controlId="formBasicNombre">
                 <Form.Label>Nombre</Form.Label>
-                <Form.Control type="text" onChange={(e) => setNombre(e.target.value)} />
+                <Form.Control 
+                  type="text" 
+                  value={nombre}
+                  onChange={handleNombreChange} 
+                />
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Correo electrónico</Form.Label>
-                <Form.Control type="email" placeholder="@gmail.com" onChange={(e) => setEmail(e.target.value)} />
+                <Form.Control 
+                  type="email" 
+                  placeholder="@gmail.com" 
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)} 
+                />
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Contraseña</Form.Label>
-                <Form.Control type="password" placeholder="escribir contraseña" onChange={(e) => setContraseña(e.target.value)} />
+                <Form.Control 
+                  type="password" 
+                  placeholder="escribir contraseña" 
+                  value={contraseña}
+                  onChange={(e) => setContraseña(e.target.value)} 
+                />
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicPasswordConfirm">
                 <Form.Label>Confirmar Contraseña</Form.Label>
-                <Form.Control type="password" placeholder="confirmar contraseña" onChange={(e) => setConfirmarContraseña(e.target.value)} />
+                <Form.Control 
+                  type="password" 
+                  placeholder="confirmar contraseña" 
+                  value={confirmarContraseña}
+                  onChange={(e) => setConfirmarContraseña(e.target.value)} 
+                />
               </Form.Group>
 
               <Button variant="primary" type="submit" className="w-100 mt-3">
