@@ -2,6 +2,7 @@
 
 ## Objetivo del Sistema
 
+https://pruebahotel.netlify.app/
 El proyecto consiste en desarrollar un sistema de gestión de hotel que permita a los usuarios registrados reservar habitaciones disponibles y al administrador gestionar las habitaciones y usuarios.
 
 ## Tabla de Contenidos
